@@ -1,10 +1,6 @@
 module AccurateSleep
 #-- Updated: 09-26-2016
 println("in AccurateSleep - 102")
-function SumAB(a, b)
-  y = a + b
-  return y
-end
 
 function sleep_ns(sleep_time::Float64)
   #=
@@ -65,12 +61,9 @@ function sleep_ns(sleep_time::Float64)
     nano3 = time_ns()  #-- actual elapsed time so far
     nano3 > nano2 && break #-- break from loop as if done
   end
-  act_sleep_time = (nano3 - nano1) / tics_per_sec
-  return act_sleep_time   #-- return the actual sleep time
-
+  #act_sleep_time = (nano3 - nano1) / tics_per_sec
+  return nothing   #-- return nothing
 end  #-- End of sleep_ns() function
-
-
-export SumAB
+include "Demo2.jl"
 export sleep_ns
 end # module
