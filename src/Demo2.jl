@@ -130,8 +130,11 @@ function Demo2(desired_sleep, numcycles, numloops)
     a1 = st + mean1
     a2 = st + mean2
     a3 = st + mean3
+    sa1 = st + smean1
+    sa2 = st + smean2
+    sa3 = st + smean3
     @printf("     Mean    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", a1,a2,a3, mean1, mean2, mean3  )
-    @printf("  ExpMean    %12.8f    %12.8f    %12.8f\n", smean1, smean2, smean3)
+    @printf("  ExpMean    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", sa1, sa2, sa3, smean1, smean2, smean3)
     @printf(" Max99.99    %12.8f    %12.8f    %12.8f\n", maxBin1, maxBin2, maxBin3)
     println("=========================================================================================================")
   end
