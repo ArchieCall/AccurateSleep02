@@ -1,4 +1,6 @@
 module AccurateSleep
+workspace()
+gc()
 #-- Updated: 09-26-2016
 println("in AccurateSleep - 102")
 
