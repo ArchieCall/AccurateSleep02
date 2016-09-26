@@ -64,6 +64,9 @@ function sleep_ns(sleep_time::Float64)
   #act_sleep_time = (nano3 - nano1) / tics_per_sec
   return nothing   #-- return nothing
 end  #-- End of sleep_ns() function
-include "Demo2.jl"
+#include("c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\Demo2.jl")
+include("Demo2.jl")
+
+
 export sleep_ns
 end # module
