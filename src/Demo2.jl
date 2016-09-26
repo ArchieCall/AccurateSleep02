@@ -1,11 +1,10 @@
-function Demo2(min_sleep, max_sleep, numcycles, numloops)
+function Demo2(desired_sleep, numcycles, numloops)
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
   maxBin1 = 0.
   maxBin2 = 0.
   maxBin3 = 0.
-  srand(time_ns())  #-- reseed random numbers
   for cy in 1:numcycles
     DiffArray1 = zeros(AbstractFloat, numloops)
     DiffArray2 = zeros(AbstractFloat, numloops)
@@ -18,8 +17,8 @@ function Demo2(min_sleep, max_sleep, numcycles, numloops)
     max_diff1 = 0.
     max_diff2 = 0.
     max_diff3 = 0.
+    sleep_time = desired_sleep
     for i in 1:numloops
-      sleep_time = min_sleep + (rand() * (max_sleep-min_sleep))
 
       begtime = time_ns()
       sleep_ns(sleep_time)
@@ -73,9 +72,9 @@ function Demo2(min_sleep, max_sleep, numcycles, numloops)
     TheDateTime = string(now())
     println("")
     @printf("======== %s ===== Cycle -> %i =============\n", TheDateTime, cy)
-    @printf("  Iters =>%6i  Min time =>%10.8f  Max time =>%10.8f\n", numloops, min_sleep, max_sleep)
+    @printf("  Iters =>%6i  Desired time =>%10.8f\n", sleep_time, max_sleep)
     println("================================================================")
-    println("  CDF Level     sleep_ns         sleep        systemsleep ")
+    println("  CDF Level     sleep_ns         sleep        systemsleep   sleep_ns         sleep        systemsleep ")
     println("================================================================")
 
 
