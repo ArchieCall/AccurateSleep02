@@ -1,4 +1,5 @@
 function Demo2(desired_sleep, numcycles, numloops)
+  #--updated  09-26-2016
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -89,7 +90,13 @@ function Demo2(desired_sleep, numcycles, numloops)
       CDF_diff3[l] = DiffSort3[bin]
 
       # do not print out for long runs
-      @printf("   %6.2f    %12.8f    %12.8f    %12.8f\n", CDF_levels[l], CDF_diff1[l], CDF_diff2[l], CDF_diff3[l] )
+      d1 = CDF_diff1[l]
+      d2 = CDF_diff2[l]
+      d3 = CDF_diff3[l]
+      a1 = sleep_time + d1
+      a2 = sleep_time + d2
+      a3 = sleep_time + d3
+      @printf("   %6.2f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", CDF_levels[l], d1, d2, d3, a1, a2, a3 )
     end
     mean1 = sum1/numloops
     mean2 = sum2/numloops
