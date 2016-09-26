@@ -72,11 +72,14 @@ function Demo2(desired_sleep, numcycles, numloops)
     #--- do not print out for long run
     TheDateTime = string(now())
     println("")
-    @printf("======== %s ===== Cycle -> %i =============\n", TheDateTime, cy)
-    @printf("  Iters =>%6i  Desired time =>%10.8f\n", numloops, sleep_time)
-    println("================================================================")
-    println("  CDF Level     sleep_ns         sleep        systemsleep   sleep_ns         sleep        systemsleep ")
-    println("================================================================")
+    @printf("======== %s ===== Cycle %i ==========================================================\n", TheDateTime, cy)
+    @printf("  Iters =>%6i    DesiredSleep => %10.8f\n", numloops, sleep_time)
+    println("  ActualSleep => actual time slept by each of the three methods")
+    println("  DifferentialSleep => abs(ActualSleep - DesiredSleep)")
+    println("==========================================================================================================")
+    println("                ---------- ActualSleep (secs) -----------       -------- DifferentialSleep (secs) ------- ")
+    println("  CDF Level     sleep_ns         sleep        systemsleep       sleep_ns         sleep        systemsleep ")
+    println("==========================================================================================================")
 
 
     for l = 1:level_cnt
@@ -96,7 +99,7 @@ function Demo2(desired_sleep, numcycles, numloops)
       a1 = sleep_time + d1
       a2 = sleep_time + d2
       a3 = sleep_time + d3
-      @printf("   %6.2f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", CDF_levels[l], d1, d2, d3, a1, a2, a3 )
+      @printf("   %6.2f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", CDF_levels[l], a1, a2, a3 , d1, d2, d3)
     end
     mean1 = sum1/numloops
     mean2 = sum2/numloops
@@ -123,9 +126,13 @@ function Demo2(desired_sleep, numcycles, numloops)
         maxBin3 = CDF_diff3[1]
       end
     end
-    @printf("     Mean    %12.8f    %12.8f    %12.8f\n", mean1, mean2, mean3)
+    st = sleep_time
+    a1 = st + mean1
+    a2 = st + mean2
+    a3 = st + mean3
+    @printf("     Mean    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", a1,a2,a3, mean1, mean2, mean3  )
     @printf("  ExpMean    %12.8f    %12.8f    %12.8f\n", smean1, smean2, smean3)
     @printf(" Max99.99    %12.8f    %12.8f    %12.8f\n", maxBin1, maxBin2, maxBin3)
-    println("================================================================")
+    println("=========================================================================================================")
   end
 end
