@@ -48,7 +48,7 @@ function Demo2(desired_sleep, numcycles, numloops)
 
       #-- Libc.systemsleep()
       begtime = time_ns()
-      Libc.systemsleep(sleep_time)
+      Libc.systemsleep(sleep_time * .5)
       endtime = time_ns()
       actual_sleep_time = (endtime - begtime) / nanosecond
       #actual_sleep_time -= overhead_time_ns  #-- substract off timing overhead
