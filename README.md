@@ -1,4 +1,4 @@
-# AccurateSleep1
+# AccurateSleep
 
 [![Build Status](https://travis-ci.org/ArchieCall/AccurateSleep.jl.svg?branch=master)](https://travis-ci.org/ArchieCall/AccurateSleep.jl)
 
