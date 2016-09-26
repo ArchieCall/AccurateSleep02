@@ -1,7 +1,6 @@
 module AccurateSleep
-workspace()
-gc()
 #-- Updated: 09-26-2016
+gc()
 println("in AccurateSleep - 102")
 
 function sleep_ns(sleep_time::Float64)
