@@ -1,5 +1,5 @@
 module AccurateSleep
-#-- Updated: 09-26-2016
+#-- Updated: 09-27-2016
 gc()
 println("in AccurateSleep - 102")
 
@@ -71,5 +71,5 @@ include("Demo2.jl")
 
 export sleep_ns
 end # module
-#AccurateSleep.Demo2(.020, 4, 100)
+#AccurateSleep.Demo2(.020, 4, 200)
 #println("all done")

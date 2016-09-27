@@ -1,5 +1,5 @@
 function Demo2(desired_sleep, numcycles, numloops)
-  #--updated  09-26-2016
+  #--updated  09-27-2016
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -72,7 +72,7 @@ function Demo2(desired_sleep, numcycles, numloops)
     #--- do not print out for long run
     TheDateTime = string(now())
     println("")
-    @printf("======== %s ===== Cycle %i ==========================================================\n", TheDateTime, cy)
+    @printf("======== %s ===== Cycle %i of %i =====================================================\n", TheDateTime, cy, numcycles)
     @printf("  Iters =>%6i    DesiredSleep => %10.8f\n", numloops, sleep_time)
     println("  ActualSleep => actual time slept by each of the three methods")
     println("  DifferentialSleep => abs(ActualSleep - DesiredSleep)")
