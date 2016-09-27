@@ -71,5 +71,5 @@ include("Demo2.jl")
 
 export sleep_ns
 end # module
-#AccurateSleep.Demo2(.020, 4, 200)
-#println("all done")
+AccurateSleep.Demo2(.020, 100, 10000)
+println("all done")
