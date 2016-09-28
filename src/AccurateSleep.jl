@@ -31,7 +31,7 @@ function sleep_ns(sleep_time::Float64)
   const tics_per_sec = 1_000_000_000.  #-- number of tics from time_ns() for one second
   const tic_fuzz = .000000001  #-- smallest possible tic
   const max_sleep = 86_400_000.  #-- 1000 days should be large enough
-  const min_sleep = .0000005      #-- 5 microseconds - relates to accuracy of time_ns() and cycle rate of computer
+  const min_sleep = .00000005      #-- 5 microseconds - relates to accuracy of time_ns() and cycle rate of computer
   nano1 = time_ns()  #-- get beginning time tic
   nano2 = nano1 + (sleep_time * tics_per_sec) - tic_fuzz #-- final time tic that needs to be exceeded
 
