@@ -5,7 +5,7 @@ println("in AccurateSleep - 102")
 
 function sleep_ns(sleep_time::Float64)
   #=
-  - Updated:  09-26-2016
+  - Updated:  09-28-2016
   - Purpose: an accurate sleep function written totally in Julia
   - Parameter: sleep_time
   -- number of seconds to sleep
@@ -65,11 +65,11 @@ function sleep_ns(sleep_time::Float64)
   #act_sleep_time = (nano3 - nano1) / tics_per_sec
   return nothing   #-- return nothing
 end  #-- End of sleep_ns() function
-#include("c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\Demo2.jl")
-include("Demo2.jl")
+#include("Demo1.jl")  #-- demo
+include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 
 
 export sleep_ns
-end # module
-#AccurateSleep.Demo2(.020,500, 1000)
+end #-- end of module AccurateSleep
+#AccurateSleep.Demo2(.020,5, 100)
 #println("all done")
