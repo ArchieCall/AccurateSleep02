@@ -39,7 +39,8 @@ function sleep_ns(sleep_time::Float64)
   if sleep_time < min_sleep
     @printf("parameter error:  sleep_time => %10.8f must be greater than %10.8f secs!!\n", sleep_time, min_sleep)
     println("program halted.")
-    quit()
+    sleeptoolow()
+    #quit()
   end
   if sleep_time > max_sleep
     @printf("parameter error:  sleep_time => %12.1f must be less than %10.1f secs!!\n", sleep_time, max_sleep)
