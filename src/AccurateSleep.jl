@@ -46,12 +46,13 @@ function sleep_ns(sleep_time::Float64)
     SpecifiedSleepTooHigh()
   end
 
-  #--- cacl sleeping time
+  #--- calc sleeping time
   time_for_sleeping = 0.
   if sleep_time > burn_time_threshold
     time_for_sleeping = sleep_time - (1.1 * burn_time_threshold)
   end
-  if time_for_sleeping > 0.
+  #if time_for_sleeping > 0.
+  if time_for_sleeping > .001
     Libc.systemsleep(time_for_sleeping)  #-- systemsleep
   end
   #------ burn_time off time left after core sleep
