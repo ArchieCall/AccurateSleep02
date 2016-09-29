@@ -72,9 +72,9 @@ include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
 end #-- end of module AccurateSleep
 
-#WantedSleep = .000001000
+WantedSleep = .000001000
 #AccurateSleep.Demo2(WantedSleep, 1, 10)   #--- warmup
-#AccurateSleep.Demo2(WantedSleep, 1, 10000) #--- actual
+AccurateSleep.Demo2(WantedSleep, 1, 2000) #--- actual
 
 #WantedTime = .002000000
 #AccurateSleep.Demo3(30, WantedTime) #--- actual
