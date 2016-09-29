@@ -1,5 +1,5 @@
 function Demo2(desired_sleep, numcycles, numloops)
-  #--updated  09-28-2016
+  #--updated  09-29-2016
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -21,11 +21,11 @@ function Demo2(desired_sleep, numcycles, numloops)
     sleep_time = desired_sleep
     for i in 1:numloops
 
+      #--- stats for sleep_ns
       begtime = time_ns()
       sleep_ns(sleep_time)
       endtime = time_ns()
       actual_sleep_time = (endtime - begtime) / nanosecond
-
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
       DiffArray1[i] = diff_sleep_time
       sum1 += diff_sleep_time
@@ -33,7 +33,7 @@ function Demo2(desired_sleep, numcycles, numloops)
         max_diff1 = diff_sleep_time
       end
 
-      #-- sleep()
+      #--- stats for sleep
       begtime = time_ns()
       sleep(sleep_time)
       endtime = time_ns()
@@ -46,7 +46,7 @@ function Demo2(desired_sleep, numcycles, numloops)
         max_diff2 = diff_sleep_time
       end
 
-      #-- Libc.systemsleep()
+      #--- stats for Libc.systemsleep
       begtime = time_ns()
       Libc.systemsleep(sleep_time)
       endtime = time_ns()
@@ -69,7 +69,6 @@ function Demo2(desired_sleep, numcycles, numloops)
     CDF_diff2 = zeros(AbstractFloat, level_cnt)
     CDF_diff3 = zeros(AbstractFloat, level_cnt)
 
-    #--- do not print out for long run
     TheDateTime = string(now())
     println("")
     @printf("======== %s ===== Cycle %i of %i =====================================================\n", TheDateTime, cy, numcycles)
@@ -80,7 +79,6 @@ function Demo2(desired_sleep, numcycles, numloops)
     println("                ---------- ActualSleep (secs) -----------       -------- DifferentialSleep (secs) ------- ")
     println("  CDF Level     sleep_ns         sleep        systemsleep       sleep_ns         sleep        systemsleep ")
     println("==========================================================================================================")
-
 
     for l = 1:level_cnt
       floatbin = CDF_levels[l] * numloops / 100
