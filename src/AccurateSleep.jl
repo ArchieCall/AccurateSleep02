@@ -1,5 +1,5 @@
 module AccurateSleep
-#-- Updated: 09-27-2016
+#-- Updated: 09-28-2016
 gc()
 println("in AccurateSleep - 102")
 
@@ -31,7 +31,7 @@ function sleep_ns(sleep_time::Float64)
   const tics_per_sec = 1_000_000_000.  #-- number of tics from time_ns() for one second
   const tic_fuzz = .000000001  #-- smallest possible tic
   const max_sleep = 86_400_000.  #-- 1000 days should be large enough
-  const min_sleep = .00000005      #-- 5 microseconds - relates to accuracy of time_ns() and cycle rate of computer
+  const min_sleep = .000000009      #-- 5 microseconds - relates to accuracy of time_ns() and cycle rate of computer
   nano1 = time_ns()  #-- get beginning time tic
   nano2 = nano1 + (sleep_time * tics_per_sec) - tic_fuzz #-- final time tic that needs to be exceeded
 
@@ -67,9 +67,13 @@ function sleep_ns(sleep_time::Float64)
 end  #-- End of sleep_ns() function
 #include("Demo1.jl")  #-- demo
 include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-
-
+include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
 end #-- end of module AccurateSleep
-#AccurateSleep.Demo2(.020,5, 100)
+#WantedTime = .000001000
+#AccurateSleep.Demo2(WantedTime, 1, 100)   #--- warmup
+#AccurateSleep.Demo2(WantedTime, 3, 10000) #--- actual
+#WantedTime = .002000000
+#AccurateSleep.Demo3(30, WantedTime) #--- actual
+
 #println("all done")

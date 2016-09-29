@@ -1,5 +1,5 @@
 function Demo2(desired_sleep, numcycles, numloops)
-  #--updated  09-27-2016
+  #--updated  09-28-2016
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -73,7 +73,7 @@ function Demo2(desired_sleep, numcycles, numloops)
     TheDateTime = string(now())
     println("")
     @printf("======== %s ===== Cycle %i of %i =====================================================\n", TheDateTime, cy, numcycles)
-    @printf("  Iters =>%6i    DesiredSleep => %10.8f\n", numloops, sleep_time)
+    @printf("  Iters =>%6i    DesiredSleep => %11.9f\n", numloops, sleep_time)
     println("  ActualSleep => actual time slept by each of the three methods")
     println("  DifferentialSleep => abs(ActualSleep - DesiredSleep)")
     println("==========================================================================================================")
@@ -99,7 +99,7 @@ function Demo2(desired_sleep, numcycles, numloops)
       a1 = sleep_time + d1
       a2 = sleep_time + d2
       a3 = sleep_time + d3
-      @printf("   %6.2f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", CDF_levels[l], a1, a2, a3 , d1, d2, d3)
+      @printf("   %6.2f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", CDF_levels[l], a1, a2, a3 , d1, d2, d3)
     end
     mean1 = sum1/numloops
     mean2 = sum2/numloops
@@ -136,9 +136,9 @@ function Demo2(desired_sleep, numcycles, numloops)
     xa1 = st + maxBin1
     xa2 = st + maxBin2
     xa3 = st + maxBin3
-    @printf("     Mean    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", a1,a2,a3, mean1, mean2, mean3  )
-    @printf("  ExpMean    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", sa1, sa2, sa3, smean1, smean2, smean3)
-    @printf(" Max99.99    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f    %12.8f\n", xa1, xa2, xa3, maxBin1, maxBin2, maxBin3)
+    @printf("     Mean    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", a1,a2,a3, mean1, mean2, mean3  )
+    @printf("  ExpMean    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", sa1, sa2, sa3, smean1, smean2, smean3)
+    @printf(" Max99.99    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", xa1, xa2, xa3, maxBin1, maxBin2, maxBin3)
     println("=========================================================================================================")
   end
 end
