@@ -49,7 +49,7 @@ function sleep_ns(sleep_time::Float64)
   #--- calc sleeping time
   time_for_sleeping = 0.
   if sleep_time > burn_time_threshold
-    time_for_sleeping = sleep_time - (1.1 * burn_time_threshold)
+    time_for_sleeping = sleep_time - (1.05 * burn_time_threshold)
   end
   #if time_for_sleeping > 0.
   if time_for_sleeping > .001
