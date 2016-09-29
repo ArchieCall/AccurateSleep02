@@ -1,6 +1,6 @@
 module AccurateSleep
 #-- Updated: 09-29-2016
-println("in AccurateSleep - 108")
+println("in AccurateSleep - 110")
 
 function sleep_ns(sleep_time::Float64)
   #=
@@ -28,12 +28,25 @@ function sleep_ns(sleep_time::Float64)
   =#
   const burn_time_threshold = .0019  #-- time in seconds that is reserved for burning
   const tics_per_sec = 1_000_000_000.  #-- number of tics from time_ns() for one second
-  const tic_fuzz = .000000100  #-- smallest possible tic
+  #const tic_fuzz = .000001500  #-- smallest possible tic
+  #const tic_fuzz = .0  #-- smallest possible tic
   const min_systemsleep = .001 #-- do not allow a Libc.systemsleep to be less than this value
   const max_sleep = 86_400_000.  #-- 1000 days should be large enough
   const min_sleep = .000000500      #-- 5 microseconds - relates to accuracy of time_ns() and cycle rate of computer
   nano1 = time_ns()  #-- get beginning time tic
-  nano2 = nano1 + ((sleep_time - tic_fuzz) * tics_per_sec)  #-- final time tic that needs to be exceeded
+  #nano2 = nano1 + ((sleep_time - tic_fuzz) * tics_per_sec)  #-- final time tic that needs to be exceeded
+  nano2 = nano1 + (sleep_time * tics_per_sec)  #-- final time tic that needs to be exceeded
+  #nanoB = nano1 + ((sleep_time - 0.) * tics_per_sec)  #-- final time tic that needs to be exceeded
+
+  #--- debug tic_fuzz
+  #=
+  ticsleep = (nano2-nano1)/tics_per_sec
+  @printf("desired sleep => %12.9f\n", sleep_time)
+  @printf("desired sleep => %12.9f\n", ticsleep)
+  @printf("desired nano fuzz removed    => %12.9f\n", nano2)
+  @printf("desired nano no fuzz removed => %12.9f\n", nanoB)
+  whoaboy()
+  =#
 
   #-- validate the value of sleep_time
   if sleep_time < min_sleep
@@ -57,11 +70,12 @@ function sleep_ns(sleep_time::Float64)
     Libc.systemsleep(time_for_sleeping)  #-- systemsleep
   end
   #------ burn_time off time left after core sleep
-  nano3 = nano1 #-- make nano3 available out while loop
+  #nano3 = nano1 #-- make nano3 available out while loop
 
   while true
-    nano3 = time_ns()  #-- actual elapsed time so far
-    nano3 > nano2 && break #-- break from loop as if done
+    #nano3 = time_ns()  #-- actual elapsed time so far
+    #nano3 >= nano2 && break #-- break from loop as if done
+    time_ns() >= nano2 && break #-- break from loop as if done
   end
   #act_sleep_time = (nano3 - nano1) / tics_per_sec
   return nothing   #-- return nothing
@@ -72,7 +86,7 @@ include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
 end #-- end of module AccurateSleep
 
-WantedSleep = .000001000
+WantedSleep = .002000000
 #AccurateSleep.Demo2(WantedSleep, 1, 10)   #--- warmup
 AccurateSleep.Demo2(WantedSleep, 1, 2000) #--- actual
 
