@@ -1,6 +1,6 @@
 module AccurateSleep
 #-- Updated: 09-29-2016
-println("in AccurateSleep - 107")
+println("in AccurateSleep - 108")
 
 function sleep_ns(sleep_time::Float64)
   #=
@@ -28,12 +28,12 @@ function sleep_ns(sleep_time::Float64)
   =#
   const burn_time_threshold = .0019  #-- time in seconds that is reserved for burning
   const tics_per_sec = 1_000_000_000.  #-- number of tics from time_ns() for one second
-  const tic_fuzz = .000000300  #-- smallest possible tic
+  const tic_fuzz = .000000100  #-- smallest possible tic
   const min_systemsleep = .001 #-- do not allow a Libc.systemsleep to be less than this value
   const max_sleep = 86_400_000.  #-- 1000 days should be large enough
   const min_sleep = .000000500      #-- 5 microseconds - relates to accuracy of time_ns() and cycle rate of computer
   nano1 = time_ns()  #-- get beginning time tic
-  nano2 = nano1 + (sleep_time * tics_per_sec) - tic_fuzz #-- final time tic that needs to be exceeded
+  nano2 = nano1 + ((sleep_time - tic_fuzz) * tics_per_sec)  #-- final time tic that needs to be exceeded
 
   #-- validate the value of sleep_time
   if sleep_time < min_sleep
