@@ -43,9 +43,10 @@ function sleep_ns(sleep_time::Float64)
     time_ns() >= nano2 && break
   end
   return nothing
-end #-- end of sleep_ns
+end #-- end of sleep_ns function
 
 #include("Demo1.jl")  #-- demo
+include("DemoTutor.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
@@ -55,5 +56,6 @@ end #-- end of AccurateSleep
 
 #WantedTime = .002000000
 #AccurateSleep.Demo3(30, WantedTime) #--- actual
-
+#using AccurateSleep
+AccurateSleep.DemoTutor() #--- actual
 #println("all done")
