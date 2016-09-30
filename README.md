@@ -9,7 +9,7 @@ A package that provides an alternative sleep function:  sleep_ns().
 This function is very similiar to the normal Julia sleep() function,
 albeit with much improved accuracy.
 
-The sleep_ns() function has an average error rate of .000001 seconds,
+The sleep_ns() function has an average error rate of .000003 seconds,
 with only 5% of the errors exceeding .000002 seconds
 
 In contrast: the regular sleep() function has an average error of .001150 seconds,
