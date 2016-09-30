@@ -1,5 +1,6 @@
 function Demo2(desired_sleep, numcycles, numloops)
-  #--updated  09-29-2016
+  #--updated  09-30-2016
+  println("v1.01 09-30-2016")
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
