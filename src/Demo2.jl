@@ -12,7 +12,6 @@ function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integ
     DiffArray2 = zeros(AbstractFloat, numloops)
     DiffArray3 = zeros(AbstractFloat, numloops)
     nanosecond = 1_000_000_000.
-    overhead_time_ns = .000000038  #--- timing overhead for two time_ns() calls
     sum1 = 0.
     sum2 = 0.
     sum3 = 0.
@@ -39,7 +38,6 @@ function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integ
       sleep(sleep_time)
       endtime = time_ns()
       actual_sleep_time = (endtime - begtime) / nanosecond
-      #actual_sleep_time -= overhead_time_ns  #-- substract off timing overhead
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
       DiffArray2[i] = diff_sleep_time
       sum2 += diff_sleep_time
@@ -49,10 +47,9 @@ function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integ
 
       #--- stats for Libc.systemsleep
       begtime = time_ns()
-      Libc.systemsleep(sleep_time * .5) #--- cut in half on purpose
+      Libc.systemsleep(sleep_time) #--- cut in half on purpose
       endtime = time_ns()
       actual_sleep_time = (endtime - begtime) / nanosecond
-      #actual_sleep_time -= overhead_time_ns  #-- substract off timing overhead
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
       DiffArray3[i] = diff_sleep_time
       sum3 += diff_sleep_time
