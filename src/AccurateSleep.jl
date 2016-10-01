@@ -1,8 +1,5 @@
 module AccurateSleep
 #-- Updated: 09-29-2016
-println("AccurateSleep v.10 dated 09-30-2016")
-
-
 function sleep_ns(sleep_time::Float64)
   #-- start of funtion
   const burn_time_threshold = .0019   #-- time in seconds that is reserved todo burning

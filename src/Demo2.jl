@@ -1,6 +1,6 @@
-function Demo2(desired_sleep, numcycles, numloops)
-  #--updated  09-30-2016
-  println("v1.01 09-30-2016")
+function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer)
+  #--updated  10-01-2016
+  println("   ...please wait while Demo2 is running")
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -140,4 +140,5 @@ function Demo2(desired_sleep, numcycles, numloops)
     @printf(" Max99.99    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", xa1, xa2, xa3, maxBin1, maxBin2, maxBin3)
     println("=========================================================================================================")
   end
+  println("   ... Demo2 has completed")
 end
