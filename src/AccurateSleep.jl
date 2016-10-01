@@ -53,6 +53,6 @@ end #-- end of AccurateSleep
 
 #WantedTime = .002000000
 #AccurateSleep.Demo3(30, WantedTime) #--- actual
-#using AccurateSleep
+using AccurateSleep
 AccurateSleep.DemoTutor() #--- actual
 #println("all done")
