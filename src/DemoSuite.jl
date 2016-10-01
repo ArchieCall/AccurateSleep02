@@ -4,6 +4,7 @@ function DemoSuite()
   println("           Suite of various demo usages of AccurateSleep ")
   println("================================================================")
   using BenchmarkTools
+  sleep(.4)
   @show @benchmark sleep_ns(.001)
   whoaa()
   AccurateSleep.DemoTutor()
