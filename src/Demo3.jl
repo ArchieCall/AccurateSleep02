@@ -1,6 +1,12 @@
 function Demo3(RunningSecs::Int, DesiredSleep::AbstractFloat)
   sleep(2.)  #-- wait until warnings completed
-  sleep_ns(.5)  #-- warm up sleep
+  sleep_ns(.5)
+  function DummyCode(NumDummyLoops) #-- warm up sleep
+    xsum = 0.
+    for i in 1:NumDummyLoops
+      xsum += rand()
+    end
+  end
   println(" ")
   println("=========================================================================================")
   println("... cpuloading_sleep_ns  => continuous calls to sleep_ns function")
@@ -15,6 +21,7 @@ function Demo3(RunningSecs::Int, DesiredSleep::AbstractFloat)
   println("=========================================================================================")
   begtim = time_ns()
   for i in 1:NumIters
+    #DummyCode(10_000_000)
     sleep_ns(DesiredSleep)
   end
   endtim = time_ns()
