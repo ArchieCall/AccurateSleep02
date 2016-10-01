@@ -1,6 +1,5 @@
 function Demo2(desired_sleep, numcycles, numloops)
-  #--updated  09-30-2016
-  println("v1.01 09-30-2016")
+  println("Demo2 v.3002 dated 10-01-2016")
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -12,7 +11,7 @@ function Demo2(desired_sleep, numcycles, numloops)
     DiffArray2 = zeros(AbstractFloat, numloops)
     DiffArray3 = zeros(AbstractFloat, numloops)
     nanosecond = 1_000_000_000.
-    overhead_time_ns = .000000038  #--- timing overhead for two time_ns() calls
+    overhead_time_ns = .000000038  #--- timing overhead For two time_ns() calls
     sum1 = 0.
     sum2 = 0.
     sum3 = 0.

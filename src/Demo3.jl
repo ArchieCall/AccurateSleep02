@@ -7,9 +7,10 @@ function Demo3(RunningSecs::Int, DesiredSleep::AbstractFloat)
       xsum += rand()
     end
   end
+  println("Demo3 v.3002 dated 10-01-2016")
   println(" ")
   println("=========================================================================================")
-  println("... cpuloading_sleep_ns  => continuous calls to sleep_ns function")
+  println("... cpuloading_sleep_ns  => continuous calls to sleep_ns Function")
   @printf("... parms:  RunningSecs => %4i secs,  DesiredSleep => %11.9f\n", RunningSecs, DesiredSleep)
   println("=========================================================================================")
   NumIters = convert(Int, round(RunningSecs / DesiredSleep))
@@ -17,7 +18,7 @@ function Demo3(RunningSecs::Int, DesiredSleep::AbstractFloat)
 
   println("")
   println("=========================================================================================")
-  @printf("... check your cpu loading for function sleep_ns?\n")
+  @printf("... check your cpu loading For Function sleep_ns?\n")
   println("=========================================================================================")
   begtim = time_ns()
   for i in 1:NumIters
@@ -30,7 +31,7 @@ function Demo3(RunningSecs::Int, DesiredSleep::AbstractFloat)
 
   println("")
   println("=========================================================================================")
-  @printf("... check your cpu loading for function Libc.systemsleep?\n")
+  @printf("... check your cpu loading For Function Libc.systemsleep?\n")
   println("=========================================================================================")
   begtim = time_ns()
   for i in 1:NumIters
