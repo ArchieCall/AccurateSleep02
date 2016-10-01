@@ -1,4 +1,4 @@
-function Demo2(desired_sleep, numcycles, numloops)
+function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer)
   println("Demo2 v.3002 dated 10-01-2016")
   smean1 = 0.
   smean2 = 0.
