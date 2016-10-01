@@ -1,6 +1,6 @@
 module AccurateSleep
-#-- Updated: 09-29-2016
-println("AccurateSleep v.10 dated 09-30-2016")
+#-- Updated: 10-01-2016
+println("AccurateSleep v.10 dated 10-01-2016")
 
 
 function sleep_ns(sleep_time::Float64)
