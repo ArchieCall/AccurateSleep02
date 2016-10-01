@@ -1,14 +1,12 @@
 module AccurateSleep
-#-- Updated: 10-01-2016
-println("AccurateSleep v.0001 dated 10-01-2016")
+println("AccurateSleep v.0002 dated 10-01-2016")
 
 function sleep_ns(sleep_time::Float64)
-  #-- start of funtion
-  const burn_time_threshold = .0019   #-- time in seconds that is reserved todo burning
+  const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000.  #-- number of tics in one sec
-  const min_systemsleep = .001    #-- Libc.systemsleep to be less than this value
+  const min_systemsleep = .001    #-- Libc.systemsleep min value - (If used)
   const max_sleep = 86_400_000.   #-- 1000 day maximum
-  const min_sleep = .000001000    #-- 1 microsecond minimum
+  const min_sleep = .000003000    #-- 3 microsecond minimum
   nano1 = time_ns()  #-- get beginning time tic
   nano2 = nano1 + (sleep_time * tics_per_sec)  #-- final time tic that needs to be exceeded
   #-- validate the value of sleep_time
@@ -50,10 +48,3 @@ include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
 end #-- end of AccurateSleep
-#WantedSleep = .002000000
-#AccurateSleep.Demo2(WantedSleep, 1, 5000) #--- actual
-
-#WantedTime = .002000000
-#AccurateSleep.Demo3(30, WantedTime) #--- actual
-
-#println("all done")
