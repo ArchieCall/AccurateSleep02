@@ -43,14 +43,6 @@ function DemoTutor()
 
   SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
 
-  f = open(SuiteName)
-  lines = readlines(f)
-  counter = 1
-  for l in lines
-    println("$counter $l")
-    println("$counter $l")
-    counter += 1
-  end
 
   open("SuiteName) do f
      line = 1
