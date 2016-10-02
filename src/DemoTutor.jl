@@ -46,7 +46,7 @@ function DemoTutor()
   @show(homedir1)
   gdir = Pkg.dir("AccurateSleep")
   @show(gdir)
-  dirdir = dir()
+  dirdir = Pkg.dir()
   @show(dirdir)
   SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
   f = open(SuiteName)
