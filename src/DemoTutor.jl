@@ -42,16 +42,9 @@ function DemoTutor()
   println("")
 
   SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
-
-
-  open("SuiteName) do f
-     line = 1
-     while !eof(f)
-       x = readline(f)
-       xx = chomp(x)
-       println("$xx")
-       line += 1
-     end
-   end
-
+  f = open(SuiteName)
+  for ln in eachline(f)
+    print("$(length(ln)), $ln")
+  end
+  close(f)
 end
