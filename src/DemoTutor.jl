@@ -1,4 +1,5 @@
 function DemoTutor()
+  println("DemoTutor v.Tutor005 dated 10-02-2016")
   println("================================================================")
   println("           Usage of AccurateSleep and sleep_ns")
   println("================================================================")
@@ -40,7 +41,7 @@ function DemoTutor()
   println(" ================================================================")
   println("")
 
-  SuiteName = "c:\\Users\\Owner\\.julia\\AccurateSleep\\src\\DemoSuite.jl"
+  SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
   open(SuiteName) do f
     for i in enumerate(eachline(f))
       println(i)
