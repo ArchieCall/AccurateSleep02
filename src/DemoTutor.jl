@@ -39,4 +39,11 @@ function DemoTutor()
   println("   https://github.com/ArchieCall/AccurateSleep  ")
   println(" ================================================================")
   println("")
+
+  SuiteName = "c:\\Users\\Owner\\.julia\\AccurateSleep\\src\\DemoSuite.jl"
+  open(SuiteName) do f
+    for i in enumerate(eachline(f))
+      println(i)
+    end
+  end
 end
