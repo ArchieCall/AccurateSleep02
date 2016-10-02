@@ -40,7 +40,8 @@ function DemoTutor()
   println("   https://github.com/ArchieCall/AccurateSleep  ")
   println(" ================================================================")
   println("")
-  @show(pwd)
+  currworkdir = pwd
+  @show(currworkdir)
   SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
   f = open(SuiteName)
 
