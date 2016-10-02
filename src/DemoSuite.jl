@@ -1,3 +1,4 @@
+using BenchmarkTools
 function DemoSuite()
   println("DemoSuite v.Suite003 dated 10-01-2016")
   println("================================================================")
