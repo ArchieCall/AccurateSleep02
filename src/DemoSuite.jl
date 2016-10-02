@@ -6,7 +6,7 @@ function DemoSuite()
   println("================================================================")
   #using BenchmarkTools
   #sleep(.4)
-  #@show @benchmark sleep_ns(.001)
+  @benchmark sleep_ns(.001)
   #whoaa()
   AccurateSleep.DemoTutor()
   sleep_ns(1.)
