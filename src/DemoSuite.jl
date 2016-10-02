@@ -4,6 +4,9 @@ function DemoSuite()
   println("================================================================")
   println("           Suite of various demo usages of AccurateSleep ")
   println("================================================================")
+  println("")
+  println("If you want to skip rest of suite then press CTRL-C now!")
+  sleep_ns(5.)
   AccurateSleep.DemoTutor()
   sleep_ns(1.)
   sleep_ns(.01)
@@ -43,7 +46,7 @@ function DemoSuite()
   sleep_ns(.5)
   AccurateSleep.Demo2(.001, 2, 1000)
   AccurateSleep.Demo3(15, .005)
-  
+
   =#
 
   println(" ... DemoSuite has completed")
