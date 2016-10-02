@@ -44,6 +44,8 @@ function DemoTutor()
   homedir1 = homedir()
   @show(currworkdir)
   @show(homedir1)
+  dirdir = dir()
+  @show(dirdir)
   SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
   f = open(SuiteName)
 
