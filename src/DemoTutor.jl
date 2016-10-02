@@ -48,7 +48,9 @@ function DemoTutor()
   counter = 1
   for l in lines
      #println("$counter $l")
-     println("$l")
+     ll = chomp(l)
+     println(ll)
+     #println("$l")
      counter += 1
   end
   close(f)
