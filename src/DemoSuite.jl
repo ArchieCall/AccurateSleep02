@@ -37,6 +37,15 @@ function DemoSuite()
   println("")
   AccurateSleep.Demo2(.000003, 1, 5000)
 
+  #=
+
+  ------ AccurateSleep commands -------
+  sleep_ns(.5)
+  AccurateSleep.Demo2(.001, 2, 1000)
+  AccurateSleep.Demo3(15, .005)
+  
+  =#
+
   println(" ... DemoSuite has completed")
   println("")
 end
