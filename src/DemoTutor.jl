@@ -49,7 +49,7 @@ function DemoTutor()
   dirdir = Pkg.dir()
   @show(dirdir)
   #SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
-  SuiteName = "DemoSuite.jl"
+  SuiteName = gdir * "\\src\\" * "DemoSuite.jl"
   f = open(SuiteName)
 
   lines = readlines(f)
