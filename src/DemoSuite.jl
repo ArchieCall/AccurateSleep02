@@ -1,6 +1,6 @@
 using BenchmarkTools
 function DemoSuite()
-  println("DemoSuite v.Suite004 dated 10-01-2016")
+  println("DemoSuite v.Suite005 dated 10-02-2016")
   println("================================================================")
   println("           Suite of various demo usages of AccurateSleep ")
   println("================================================================")
@@ -14,17 +14,27 @@ function DemoSuite()
 
   println("\n--- benchmark sleep of .001 secs")
   @show @benchmark sleep(.001)
+  println("")
   @show @benchmark Libc.systemsleep(.001)
+  println("")
   @show @benchmark sleep_ns(.001)
+  println("")
+
 
   println("\n--- benchmark sleep of .005 secs")
   @show @benchmark sleep(.005)
+  println("")
   @show @benchmark Libc.systemsleep(.005)
+  println("")
   @show @benchmark sleep_ns(.005)
+  println("")
+
 
   println("\nVarious CDF reports")
   AccurateSleep.Demo2(.001, 2, 1000)
+  println("")
   AccurateSleep.Demo2(.0001, 1, 5000)
+  println("")
   AccurateSleep.Demo2(.000003, 1, 5000)
 
   println(" ... DemoSuite has completed")
