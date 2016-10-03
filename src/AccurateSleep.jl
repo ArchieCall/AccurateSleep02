@@ -43,8 +43,8 @@ function sleep_ns(sleep_time::AbstractFloat)
 end #-- end of sleep_ns
 
 #include("Demo1.jl")  #-- demo
+include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("DemoTutor.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-#include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
