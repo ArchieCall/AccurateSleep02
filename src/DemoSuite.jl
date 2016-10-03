@@ -5,9 +5,53 @@ function DemoSuite()
   println("           Suite of various demo usages of AccurateSleep ")
   println("================================================================")
   println("")
-  println("If you want to skip rest of suite then press CTRL-C now!")
+
+  #=
+  ================================================================
+  Usage of AccurateSleep and sleep_ns
+  ================================================================
+
+  using AccurateSleep
+  ---------------------------------------------------------------
+  ... loads AccurateSleep package and its functions ...
+
+  AccurateSleep.DemoTutor()
+  ---------------------------------------------------------------
+  ... runs this tutorial ...
+
+  sleep_ns(SleepSecs::AbstractFloat
+  ---------------------------------------------------------------
+  ... primary Function within AccurateSleep ...
+  ... accurately sleeps specified SleepSecs ...
+  sleep_ns(.5)                   : sleeps half second
+  sleep_ns(.000005)              : sleeps 5 microseconds
+  sleep_ns(5.)                   : sleeps 5 seconds
+  sleep_ns(1)                    : errors out - not float"
+
+  AccurateSleep.Demo1()
+  ---------------------------------------------------------------
+  ... runs simple script showcasing sleep_ns ...
+
+  AccurateSleep.Demo2(SleepSecs::AbstractFloat, NumCycles::Integer, NumIters::Integer)
+  -------------------------------------------------------------------------------------
+  ... produces a detailed CDF report ...
+  AccurateSleep.Demo2(.001, 3, 2000)      - sleeps .001 secs, 3 cycles, 2000 iters
+  AccurateSleep.Demo2(.000001, 1, 10000)  - sleeps .000001 secs, 1 cycle, 10000 iters)
+
+  AccurateSleep.Demo3(secs, DesiredSleep)
+  ---------------------------------------------------------------
+  ... grinder to evaluate CPU loading ...
+
+  ================================================================
+  See the Package doc on Github
+  https://github.com/ArchieCall/AccurateSleep
+  ================================================================
+  =#
+
+
+  println("\nIf you want to skip rest of suite then press CTRL-C now!\n")
+  
   sleep_ns(5.)
-  #AccurateSleep.DemoTutor()
   sleep_ns(1.)
   sleep_ns(.01)
   sleep_ns(.001)
