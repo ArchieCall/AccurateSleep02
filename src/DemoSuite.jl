@@ -1,36 +1,35 @@
 using BenchmarkTools
 function DemoSuite()
-  println("DemoSuite v.Suite005 dated 10-02-2016")
-  println("================================================================")
-  println("           Suite of various demo usages of AccurateSleep ")
-  println("================================================================")
-  println("")
 
   #=
   ================================================================
-  Usage of AccurateSleep and sleep_ns
+  Usage of AccurateSleep package and sleep_ns
   ================================================================
 
   using AccurateSleep
   ---------------------------------------------------------------
-  ... loads AccurateSleep package and its functions ...
+  ... loads AccurateSleep package and its functions
 
   AccurateSleep.DemoTutor()
   ---------------------------------------------------------------
-  ... runs this tutorial ...
+  ... outputs this tutorial
+  ... runs a canned script
 
-  sleep_ns(SleepSecs::AbstractFloat
+  sleep_ns(SleepSecs::AbstractFloat)
   ---------------------------------------------------------------
-  ... primary Function within AccurateSleep ...
-  ... accurately sleeps specified SleepSecs ...
+  ... primary Function within AccurateSleep
+  ... accurately sleeps specified SleepSecs and returns nothing
+  ... SleepSecs must be floating point
+  ... SleepSecs must be in range of .000003 to 84_400_000.
   sleep_ns(.5)                   : sleeps half second
   sleep_ns(.000005)              : sleeps 5 microseconds
   sleep_ns(5.)                   : sleeps 5 seconds
   sleep_ns(1)                    : errors out - not float"
 
-  AccurateSleep.Demo1()
+  AccurateSleep.DemoSuite()
   ---------------------------------------------------------------
-  ... runs simple script showcasing sleep_ns ...
+  ... runs script showcasing the accuracey of sleep_ns
+  ... BenchmarkTools must be installed which provides the @benchmark macro
 
   AccurateSleep.Demo2(SleepSecs::AbstractFloat, NumCycles::Integer, NumIters::Integer)
   -------------------------------------------------------------------------------------
@@ -48,6 +47,23 @@ function DemoSuite()
   ================================================================
   =#
 
+  print("String? ")
+  y = chomp(readline())
+  println("Your input was \"", y, "\".\n")
+  print("Integer? ")
+  y = chomp(readline())
+  try
+    y = parseint(y)
+    println("Your input was \"", y, "\".\n")
+  catch
+    println("Sorry, but \"", y, "\" does not compute as an integer.")
+  end
+
+  println("DemoSuite v.Suite005 dated 10-02-2016")
+  println("================================================================")
+  println("           Suite of various demo usages of AccurateSleep ")
+  println("================================================================")
+  println("")
 
   println("\nIf you want to skip rest of suite then press CTRL-C now!\n")
   sleep_ns(5.)
