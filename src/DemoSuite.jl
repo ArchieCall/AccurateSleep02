@@ -49,7 +49,7 @@ function DemoSuite()
 
   println("  Do you want to run the rest of the DemoSuite? ")
   println("  Enter "y" , or "n" to quit. ")
-  keyentered = chomp(readline(STDIN))
+  keyentered = chomp(readline())
   #@show(keyentered)
   if keyentered == "n"
     #sleep_ns(2.)
