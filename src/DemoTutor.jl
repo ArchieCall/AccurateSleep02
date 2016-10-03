@@ -1,6 +1,6 @@
 function DemoTutor()
   println("DemoTutor v.Tutor005 dated 10-02-2016")
-  
+
   println("")
   currworkdir = pwd()
   homedir1 = homedir()
@@ -10,6 +10,9 @@ function DemoTutor()
   @show(gdir)
   dirdir = Pkg.dir()
   @show(dirdir)
+  BenchmarkInstalled = Pkg.installed("BenchmarkTools")
+  @show(BenchmarkInstalled)
+  whoa()
   #SuiteName = "c:\\Users\\Owner\\.julia\\v0.5\\AccurateSleep\\src\\DemoSuite.jl"
   SuiteName = gdir * "\\src\\" * "DemoSuite.jl"
   f = open(SuiteName)
