@@ -49,15 +49,8 @@ function DemoSuite()
 
   print("String? ")
   y = chomp(readline())
-  println("Your input was \"", y, "\".\n")
-  print("Integer? ")
-  y = chomp(readline())
-  try
-    y = parseint(y)
-    println("Your input was \"", y, "\".\n")
-  catch
-    println("Sorry, but \"", y, "\" does not compute as an integer.")
-  end
+  @show(y)
+  sleep_ns(5.)
 
   println("DemoSuite v.Suite005 dated 10-02-2016")
   println("================================================================")
