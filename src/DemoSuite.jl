@@ -50,14 +50,16 @@ function DemoSuite()
 
 
   println("\nIf you want to skip rest of suite then press CTRL-C now!\n")
-  
   sleep_ns(5.)
-  sleep_ns(1.)
-  sleep_ns(.01)
-  sleep_ns(.001)
-  sleep_ns(.0001)
-  sleep_ns(.00001)
-  sleep_ns(.000003)
+
+  println("---- 6 sleep_ns() calls with various sleep times")
+  println("---- integers are not accepeted")
+  @show sleep_ns(1.)
+  @show sleep_ns(.01)
+  @show sleep_ns(.001)
+  @show sleep_ns(.0001)
+  @show sleep_ns(.00001)
+  @show sleep_ns(.000003)
 
   println("\n--- benchmark sleep of .001 secs")
   @show @benchmark sleep(.001)
