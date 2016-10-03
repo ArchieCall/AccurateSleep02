@@ -47,8 +47,8 @@ function DemoSuite()
   ================================================================
   =#
 
-  println("  Do you want to run the rest of the DemoSuite? ")
-  println("  Enter "y" , or "n" to quit. ")
+  #println("  Do you want to run the rest of the DemoSuite? ")
+  #println("  Enter "y" , or "n" to quit. ")
 
   #=
   keyentered = chomp(readline())
