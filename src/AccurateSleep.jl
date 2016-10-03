@@ -48,4 +48,4 @@ include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
 include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
-end #-- end of AccurateSleep
+end #-- end of AccurateSleep module
