@@ -48,9 +48,10 @@ function DemoSuite()
   =#
 
   print("String? ")
-  y = chomp(readline())
-  @show(y)
-  sleep_ns(5.)
+  keyentered = chomp(readline(STDIN))
+  @show(keyentered)
+  sleep_ns(2.)
+  whoa()
 
   println("DemoSuite v.Suite005 dated 10-02-2016")
   println("================================================================")
