@@ -1,6 +1,14 @@
 module AccurateSleep
 println("AccurateSleep v.0003 dated 10-01-2016")
-
+BenchmarkToolsInstalled = true
+if Pkg.installed("BenchmarkTools") !== nothing
+  BenchmarkToolsInstalled = true
+else
+  BenchmarkToolsInstalled = false
+  println("\nThe required package: 'BenchmarkTools' is not installed!")
+  println("Please install 'BenchmarkTools' before using AccurateSleep.")
+  quit()
+end
 function sleep_ns(sleep_time::AbstractFloat)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000.  #-- number of tics in one sec
