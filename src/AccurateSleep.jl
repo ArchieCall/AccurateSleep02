@@ -1,15 +1,6 @@
 module AccurateSleep
 println("AccurateSleep v.0004 dated 10-04-2016")
-BenchmarkToolsInstalled = true
-if Pkg.installed("BenchmarkTools") !== nothing
-  BenchmarkToolsInstalled = true
-else
-  BenchmarkToolsInstalled = false
-  println("\nThe required package: 'BenchmarkTools' is not installed!")
-  println("Please install 'BenchmarkTools' before using AccurateSleep.\n")
-  return
-  #exit(0)
-end
+
 function sleep_ns(sleep_time::AbstractFloat)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000.  #-- number of tics in one sec
@@ -50,11 +41,20 @@ function sleep_ns(sleep_time::AbstractFloat)
   end
   return nothing
 end #-- end of sleep_ns
-
-#include("Demo1.jl")  #-- demo
-include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-include("DemoTutor.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-include("Demo3.jl")  #-- demo CPU utilization
 export sleep_ns
+BenchmarkToolsInstalled = true
+if Pkg.installed("BenchmarkTools") !== nothing
+  BenchmarkToolsInstalled = true
+  include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
+  include("DemoTutor.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
+  include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
+  include("Demo3.jl")  #-- demo CPU utilization
+else
+  BenchmarkToolsInstalled = false
+  println("\nThe package: 'BenchmarkTools' is not installed!")
+  println("\nIf you want to run the Demo fucntions this package must be installed!")
+  println("Calling only sleep_ns() does not require 'BenchmarkTools'\n")
+  #return
+  #exit(0)
+end
 end #-- end of AccurateSleep module
