@@ -1,5 +1,5 @@
 module AccurateSleep
-println("AccurateSleep v.0003 dated 10-01-2016")
+println("AccurateSleep v.0004 dated 10-04-2016")
 BenchmarkToolsInstalled = true
 if Pkg.installed("BenchmarkTools") !== nothing
   BenchmarkToolsInstalled = true

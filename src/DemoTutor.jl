@@ -4,7 +4,8 @@ function DemoTutor()
   println("")
   gdir = Pkg.dir("AccurateSleep")
 
-  SuiteName = gdir * "\\src\\" * "DemoSuite.jl"
+  #SuiteName = gdir * "\\src\\" * "DemoSuite.jl"
+  SuiteName = gdir * "\\src\\" * "Instructions.txt"
   f = open(SuiteName)
   lines = readlines(f)
   counter = 1

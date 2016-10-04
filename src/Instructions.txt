@@ -1,0 +1,38 @@
+================================================================
+Usage of AccurateSleep package and sleep_ns
+================================================================
+
+using AccurateSleep
+---------------------------------------------------------------
+... loads AccurateSleep package and its functions
+
+AccurateSleep.DemoTutor()
+---------------------------------------------------------------
+... outputs this tutorial
+... runs a canned script
+
+sleep_ns(SleepSecs::AbstractFloat)
+---------------------------------------------------------------
+... primary Function within AccurateSleep
+... accurately sleeps specified SleepSecs and returns nothing
+... SleepSecs must be floating point
+... SleepSecs must be in range of .000003 to 84_400_000.
+sleep_ns(.5)                   : sleeps half second
+sleep_ns(.000005)              : sleeps 5 microseconds
+sleep_ns(5.)                   : sleeps 5 seconds
+sleep_ns(1)                    : errors out - not float"
+
+AccurateSleep.DemoSuite()
+---------------------------------------------------------------
+... runs script showcasing the accuracey of sleep_ns
+... BenchmarkTools must be installed which provides the @benchmark macro
+
+AccurateSleep.Demo2(SleepSecs::AbstractFloat, NumCycles::Integer, NumIters::Integer)
+-------------------------------------------------------------------------------------
+... produces a detailed CDF report ...
+AccurateSleep.Demo2(.001, 3, 2000)      - sleeps .001 secs, 3 cycles, 2000 iters
+AccurateSleep.Demo2(.000001, 1, 10000)  - sleeps .000001 secs, 1 cycle, 10000 iters)
+
+AccurateSleep.Demo3(secs, DesiredSleep)
+---------------------------------------------------------------
+... grinder to evaluate CPU loading ...
