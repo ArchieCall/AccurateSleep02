@@ -52,9 +52,7 @@ if Pkg.installed("BenchmarkTools") !== nothing
 else
   BenchmarkToolsInstalled = false
   println("\nThe package: 'BenchmarkTools' is not installed!")
-  println("\nIf you want to run the Demo fucntions this package must be installed!")
-  println("Calling only sleep_ns() does not require 'BenchmarkTools'\n")
-  #return
-  #exit(0)
+  println("\nTo run the Demo fucntions, this package must be installed.")
+  println("Note: Calling only sleep_ns() does not require 'BenchmarkTools'.\n")
 end
 end #-- end of AccurateSleep module
