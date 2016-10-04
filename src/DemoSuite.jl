@@ -54,16 +54,6 @@ function DemoSuite()
     BenchmarkToolsInstalled = false
   end
   =#
-  BenchmarkToolsInstalled = true
-  if Pkg.installed("BenchmarkTools") !== nothing
-    BenchmarkToolsInstalled = true
-  else
-    BenchmarkToolsInstalled = false
-  end
-  @show(BenchmarkToolsInstalled)
-  whoaboy()
-
-
   println("DemoSuite v.Suite005 dated 10-02-2016")
   println("================================================================")
   println("           Suite of various demo usages of AccurateSleep ")
