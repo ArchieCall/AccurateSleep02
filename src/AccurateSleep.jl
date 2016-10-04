@@ -7,7 +7,7 @@ else
   BenchmarkToolsInstalled = false
   println("\nThe required package: 'BenchmarkTools' is not installed!")
   println("Please install 'BenchmarkTools' before using AccurateSleep.")
-  quit()
+  gobble()
 end
 function sleep_ns(sleep_time::AbstractFloat)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
