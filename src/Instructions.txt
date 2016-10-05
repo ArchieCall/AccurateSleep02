@@ -4,8 +4,8 @@
 using AccurateSleep               :loads the Package
 sleep_ns(secs)                    :sleeps accurately for # of secs
 AccurateSleep.DemoSuite()         :showcases and contrasts sleep examples
+AccurateSleep.DemoCPULoad()       :repetitive sleeping to evaulate CPU loads
 AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
-AccurateSleep.DemoCPULoading()    :repetitive sleeping to evaulate CPU loads
 
 
     using AccurateSleep
@@ -36,7 +36,7 @@ AccurateSleep.DemoCPULoading()    :repetitive sleeping to evaulate CPU loads
   AccurateSleep.DemoCDF(.001, 3, 2000)      : sleeps .001 secs over 3 cycles with 2000 iters
   AccurateSleep.DemoCDF(.000001, 1, 10000)  : sleeps .000003 secs for 1 cycle of 10000 iters
 
-    AccurateSleep.DemoCPULoads()
+    AccurateSleep.DemoCPULoad()
 ------------------------------------------------------------------------------
  ... grinder to evaluate CPU loading under various sleep scenarios
 
