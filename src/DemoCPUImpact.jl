@@ -20,7 +20,7 @@ function DemoCPUImpact()
       NumInnerIters = convert(Int, round(InnerBurnTime / st))
       ActInnerBurnTime = NumInnerIters * st
       NumOuterIters = convert(Int, round(RunningSecs / InnerLoopTime))
-      #@printf("Sleep = %10.4f  BurnLevel = %10.4f InnerLoopPause = %11.8f NumInnerIters = %5i ActInnerBurnTime = %11.8f\n", st, bl, InnerLoopPause, NumInnerIters, ActInnerBurnTime)
+      @printf("Sleep = %10.4f  BurnLevel = %10.4f InnerLoopPause = %11.8f NumInnerIters = %5i ActInnerBurnTime = %11.8f\n", st, bl, InnerLoopPause, NumInnerIters, ActInnerBurnTime)
       println("=====================================================================================")
       @printf("sleep_time = %11.8f secs\n", st)
       @printf("BurnLevel = %11.3f percent\n", bl * 100.)
