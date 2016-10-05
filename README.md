@@ -14,6 +14,8 @@ with only 5% of the errors exceeding .000002 seconds
 
 In contrast: the regular sleep() function has an average error of .001150 seconds,
 with 5% of the errors exceeding .002100 seconds
+
+Use with caution!
 ```
 ### Installation
 ```
@@ -25,7 +27,7 @@ I will get there once Github commands are wrapped in my mind!
 ```julia
 #-- copy and paste the contents of "sleep_ns.jl" into an appropriate location in your Julia application
 #-- the contents are the sleep_ns() function
-#-- no external packages are required 
+#-- no external packages are required
 
 sleep_ns(.05)  #-- warm up sleep_ns
 sleep_ns(.05)  #-- sleep accurately for .05 seconds
@@ -83,7 +85,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 * produce timestamps or tokens on some frequency
 
 -------------
-## How sleep_ns() works 
+## How sleep_ns() works
   * upon examining sleep()
     * the time slept is always greater than the specified time
     * average error of the sleep is about .00150 second
@@ -101,8 +103,8 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
   * burn cycle is a simple while loop that
     * computes elapsed time: delta = (time_ns() - nano1) / 1_000_000_000.
     * if delta equal or exceeds .00800 then, sleep_ns() is done
-  * delta returned is returned 
-  
+  * delta returned is returned
+
 ## CPU loading when using sleep_ns
 * the sleep(partial_sleep_time) portion of sleep_ns() has zero impact on loading
 * the burn cycle of sleep_ns() has an impact on cpu loading
@@ -150,7 +152,7 @@ Since sleep-ns() makes use of sleep(), this extra alloction follows thru to each
 whenever the sleep_time is in excess of .0023000 seconds.
 ```
 ---------------  
-### Functions 
+### Functions
 ***sleep_ns()***
 ```
 stand alone function that performs a hybrid sleep
@@ -169,8 +171,8 @@ produces probability density function & cumulative density functions
 ***six_sleeps()***
 ```
 performs six calls to sleep_ns() using a graded series of sleep_times's
-``` 
- 
+```
+
  ***The AccurateSleep.jl is comprised of the following:***
  * module NewSleep
    * sleep_ns() function
@@ -187,15 +189,15 @@ performs six calls to sleep_ns() using a graded series of sleep_times's
    * import NewSleep.interval_function_caller
    * import NewSleep.do_something
    * runs examples showing sleep_ns in action
- * 
+ *
 
 ## Possible use of sleep_ns in parallel operation
 ```
   There are areas of parallel operations that use polling.
-  
+
   I have examined some of these and it seems that the poll timing is only accurate
   to about 1.5 milliseconds which is similiar to sleep().
-  
+
   Potentially some of this polling or waiting could be augmented with sleep_ns().
   Of course, such a revision would need to be weighed against increased CPU loading!
 ```

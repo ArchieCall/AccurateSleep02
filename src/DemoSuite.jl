@@ -1,6 +1,23 @@
 using BenchmarkTools
 function DemoSuite()
-  println("DemoSuite v.Suite005 dated 10-04-2016")
+  println("DemoSuite v.Suite005 dated 10-05-2016")
+
+  println("")
+  gdir = Pkg.dir("AccurateSleep")
+  SuiteName = gdir * "\\src\\" * "Instructions.txt"
+  f = open(SuiteName)
+  lines = readlines(f)
+  counter = 1
+  for l in lines
+     ll = chomp(l)
+     println(ll)
+     counter += 1
+  end
+  close(f)
+  sleep_ns(3.)
+
+
+
   println("================================================================")
   println("           Suite of various demo usages of AccurateSleep ")
   println("================================================================")

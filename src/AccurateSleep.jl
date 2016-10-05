@@ -1,5 +1,5 @@
 module AccurateSleep
-println("AccurateSleep v.0004 dated 10-04-2016")
+println("AccurateSleep v.0005 dated 10-05-2016")
 
 function sleep_ns(sleep_time::AbstractFloat)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
@@ -46,7 +46,7 @@ BenchmarkToolsInstalled = true
 if Pkg.installed("BenchmarkTools") !== nothing
   BenchmarkToolsInstalled = true
   include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-  include("DemoTutor.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
+  #include("DemoTutor.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
   include("Demo2.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
   include("Demo3.jl")  #-- demo CPU utilization
 else

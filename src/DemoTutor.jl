@@ -1,10 +1,7 @@
 function DemoTutor()
-  println("DemoTutor v.Tutor006 dated 10-03-2016")
-
+  println("DemoTutor v.Tutor005 dated 10-05-2016")
   println("")
   gdir = Pkg.dir("AccurateSleep")
-
-  #SuiteName = gdir * "\\src\\" * "DemoSuite.jl"
   SuiteName = gdir * "\\src\\" * "Instructions.txt"
   f = open(SuiteName)
   lines = readlines(f)
