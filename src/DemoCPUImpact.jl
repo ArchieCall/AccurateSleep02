@@ -18,7 +18,67 @@ function DemoCPUImpact()
   @printf("... parms:  RunningSecs => %4i secs,  DesiredSleep => %11.9f\n", RunningSecs, DesiredSleep)
   println("=========================================================================================")
 
-  DesiredSleep = 1.
+  DesiredSleep = 1.0000
+  NumIters = convert(Int, round(RunningSecs / DesiredSleep))
+  println("")
+  println("=========================================================================================")
+  @printf("... for %i secs check cpu loading using sleep_ns() of %11.9f seconds\n", RunningSecs, DesiredSleep)
+  println("=========================================================================================")
+  for i in 1:NumIters
+    sleep_ns(DesiredSleep)
+  end
+
+  DesiredSleep = .1000
+  NumIters = convert(Int, round(RunningSecs / DesiredSleep))
+  println("")
+  println("=========================================================================================")
+  @printf("... for %i secs check cpu loading using sleep_ns() of %11.9f seconds\n", RunningSecs, DesiredSleep)
+  println("=========================================================================================")
+  for i in 1:NumIters
+    sleep_ns(DesiredSleep)
+  end
+
+  DesiredSleep = .0100
+  NumIters = convert(Int, round(RunningSecs / DesiredSleep))
+  println("")
+  println("=========================================================================================")
+  @printf("... for %i secs check cpu loading using sleep_ns() of %11.9f seconds\n", RunningSecs, DesiredSleep)
+  println("=========================================================================================")
+  for i in 1:NumIters
+    sleep_ns(DesiredSleep)
+  end
+
+  DesiredSleep = .0075
+  NumIters = convert(Int, round(RunningSecs / DesiredSleep))
+  println("")
+  println("=========================================================================================")
+  @printf("... for %i secs check cpu loading using sleep_ns() of %11.9f seconds\n", RunningSecs, DesiredSleep)
+  println("=========================================================================================")
+  for i in 1:NumIters
+    sleep_ns(DesiredSleep)
+  end
+
+  DesiredSleep = .0050
+  NumIters = convert(Int, round(RunningSecs / DesiredSleep))
+  println("")
+  println("=========================================================================================")
+  @printf("... for %i secs check cpu loading using sleep_ns() of %11.9f seconds\n", RunningSecs, DesiredSleep)
+  println("=========================================================================================")
+  for i in 1:NumIters
+    sleep_ns(DesiredSleep)
+  end
+
+  DesiredSleep = .0025
+  NumIters = convert(Int, round(RunningSecs / DesiredSleep))
+  println("")
+  println("=========================================================================================")
+  @printf("... for %i secs check cpu loading using sleep_ns() of %11.9f seconds\n", RunningSecs, DesiredSleep)
+  println("=========================================================================================")
+  for i in 1:NumIters
+    sleep_ns(DesiredSleep)
+  end
+
+  DesiredSleep = .0010
   NumIters = convert(Int, round(RunningSecs / DesiredSleep))
   println("")
   println("=========================================================================================")
