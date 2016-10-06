@@ -10,7 +10,8 @@ function DemoCPUImpact()
   RunningSecs = 20.
   InnerLoopTime = 1.
   #WantedSleep = [.1000, .0100, .0080, .0060, .0050, .0040, .0030, .0025, .0020, .0015]
-  WantedSleep = [.0050, .0030, .0020, .0015, .0010]
+  #WantedSleep = [.0050, .0030, .0020, .0015, .0010]
+  WantedSleep = [.0100, .0080, .0060]
   BurnLevel = [100., 75., 50., 25., 1.] #-- 1.000 = 100% burn, .01 = 1% burn
   for st in WantedSleep
     for bl in BurnLevel
