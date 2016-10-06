@@ -2,6 +2,7 @@ using BenchmarkTools
 end
 function DemoSuite()
   println("DemoSuite v.Suite005 dated 10-05-2016")
+
   TimerOK = AccurateSleep.CheckInterruptTimer()
   if TimerOK == false
     println("")
@@ -13,6 +14,7 @@ function DemoSuite()
     println(" ... opening Chrome may maintain appropriate resoution.")
     println("")
     return
+  end
 
   println("")
   gdir = Pkg.dir("AccurateSleep")
@@ -21,9 +23,9 @@ function DemoSuite()
   lines = readlines(f)
   counter = 1
   for l in lines
-     ll = chomp(l)
-     println(ll)
-     counter += 1
+    ll = chomp(l)
+    println(ll)
+    counter += 1
   end
   close(f)
   sleep_ns(3.)
