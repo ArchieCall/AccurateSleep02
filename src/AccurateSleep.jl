@@ -42,6 +42,9 @@ function sleep_ns(sleep_time::AbstractFloat)
   return nothing
 end #-- end of sleep_ns
 export sleep_ns
+sleep(.001)  #--warmup
+Libc.systemsleep(.001)  #--warmup
+sleep_ns(.001)  #--warmup
 BenchmarkToolsInstalled = true
 if Pkg.installed("BenchmarkTools") !== nothing
   BenchmarkToolsInstalled = true
