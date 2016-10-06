@@ -7,26 +7,23 @@ function DemoCPUImpact()
       xsum += rand()
     end
   end
-  RunningSecs = 30.
-  DesiredSleep = .0075
+  RunningSecs = 20.
   InnerLoopTime = 1.
   #WantedSleep = [.1000, .0100, .0080, .0060, .0050, .0040, .0030, .0025, .0020, .0015]
-  WantedSleep = [.0050, .0030, .0020, .0015]
-  BurnLevel = [1.0000, .7500, .5000, .0100] #-- 1.000 = 100% burn, .01 = 1% burn
+  WantedSleep = [.0050, .0030, .0020, .0015, .0010]
+  BurnLevel = [100., 75., 50., 25., 1.] #-- 1.000 = 100% burn, .01 = 1% burn
   for st in WantedSleep
     for bl in BurnLevel
-      InnerLoopPause = InnerLoopTime * (1. - bl)
+      InnerLoopPause = InnerLoopTime * (100. - bl)/100.
       InnerBurnTime = InnerLoopTime - InnerLoopPause
       NumInnerIters = convert(Int, round(InnerBurnTime / st))
       ActInnerBurnTime = NumInnerIters * st
       NumOuterIters = convert(Int, round(RunningSecs / InnerLoopTime))
-      @printf("Sleep = %10.4f  BurnLevel = %10.4f InnerLoopPause = %11.8f NumInnerIters = %5i ActInnerBurnTime = %11.8f\n", st, bl, InnerLoopPause, NumInnerIters, ActInnerBurnTime)
       println("=====================================================================================")
-      @printf("sleep_time = %11.8f secs\n", st)
-      @printf("BurnLevel = %11.3f percent\n", bl * 100.)
-      println("check your CPU loading")
+      @printf("check your CPU loading during the next %i loops /n", NumOuterIters)
       println("=====================================================================================")
       for ol in 1:NumOuterIters
+        @printf("Loop => %3i  sleep_time = %11.6f secs   BurnLevel => %4.0f Percent\n", ol, st, bl )
         if InnerLoopPause > .0001
           Libc.systemsleep(InnerLoopPause)
         end
