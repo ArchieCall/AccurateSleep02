@@ -9,8 +9,7 @@ function DemoSuite()
     println(" ... accuracy of AccurateSleep is adversely affected.")
     println(" ... see the AccurateSleep doc for corrective measures.")
     println(" ... this is prevalent on the Windows OS.")
-    println(" ... opening AdobeReaderDC may maintain appropriate resoution.")
-    println(" ... opening Chrome may maintain appropriate resoution.")
+    println(" ... opening AdobeReaderDC, or Chrome may maintain appropriate resoution.")
     println("")
     return
   end
@@ -34,7 +33,7 @@ function DemoSuite()
   println("================================================================")
   println("")
 
-  println("\nIf you want to skip rest of suite then press CTRL-C now!\n")
+  println("\nIf you want to skip rest of suite, press CTRL-C anytime!\n")
   sleep_ns(5.)
 
   println("---- 6 sleep_ns() calls with various sleep times")
