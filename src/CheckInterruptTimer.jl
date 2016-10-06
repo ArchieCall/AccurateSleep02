@@ -6,7 +6,7 @@ function CheckInterruptTimer()
   MaxTime = 0.
   MinTime = 999.
   SumTime = 0.
-  NumIters = 1000
+  NumIters = 500
   WantedSleep = .001
   for i=1:NumIters
     t1 = time_ns()
@@ -26,15 +26,17 @@ function CheckInterruptTimer()
   MeanDiff = MeanTime - WantedSleep
   MaxDiff = MaxTime - WantedSleep
   MinDiff = MinTime - WantedSleep
-  @printf("MeanTime => %11.9f   MeanTimeDiff => %11.9f \n", MeanTime, MeanDiff)
-  @printf("MaxTime  => %11.9f   MaxDiff      => %11.9f \n", MaxTime, MaxDiff)
-  @printf("MinTime  => %11.9f   MinDiff      => %11.9f \n", MinTime, MinDiff)
   if MeanDiff > .00165
     IsTimerValid = false
   end
   if MaxDiff > .0055
     IsTimerValid = false
   end
-  sleep(.1)
+  if IsTimerValid == false  #-- only print stats if false
+    @printf("MeanTime => %11.9f   MeanTimeDiff => %11.9f \n", MeanTime, MeanDiff)
+    @printf("MaxTime  => %11.9f   MaxDiff      => %11.9f \n", MaxTime, MaxDiff)
+    @printf("MinTime  => %11.9f   MinDiff      => %11.9f \n", MinTime, MinDiff)
+    sleep(.1)  #-- allow time for print to complete
+  end
   return IsTimerValid
 end
