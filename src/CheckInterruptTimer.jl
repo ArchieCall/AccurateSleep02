@@ -8,6 +8,9 @@ function CheckInterruptTimer()
   SumTime = 0.
   NumIters = 500
   WantedSleep = .001
+  t1 = time_ns()
+  sleep(WantedSleep) #--- dummy call to sleep to warm it up
+  t2 = time_ns()
   for i=1:NumIters
     t1 = time_ns()
     sleep(WantedSleep)
