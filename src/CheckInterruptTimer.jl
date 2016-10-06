@@ -26,7 +26,7 @@ function CheckInterruptTimer()
   MeanDiff = MeanTime - WantedSleep
   MaxDiff = MaxTime - WantedSleep
   MinDiff = MinTime - WantedSleep
-  if MeanDiff > .00165
+  if MeanDiff > .0017
     IsTimerValid = false
   end
   if MaxDiff > .0090
