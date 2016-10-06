@@ -36,9 +36,11 @@ function CheckInterruptTimer()
     IsTimerValid = false
   end
   if IsTimerValid == false  #-- only print stats if false
+    println("")
     @printf("MeanTime => %11.9f   MeanTimeDiff => %11.9f \n", MeanTime, MeanDiff)
     @printf("MaxTime  => %11.9f   MaxDiff      => %11.9f \n", MaxTime, MaxDiff)
     @printf("MinTime  => %11.9f   MinDiff      => %11.9f \n", MinTime, MinDiff)
+    println("")
     sleep(.1)  #-- allow time for print to complete
   end
   return IsTimerValid

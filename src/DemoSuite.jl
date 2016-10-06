@@ -1,6 +1,18 @@
 using BenchmarkTools
+end
 function DemoSuite()
   println("DemoSuite v.Suite005 dated 10-05-2016")
+  TimerOK = AccurateSleep.CheckInterruptTimer()
+  if TimerOK == false
+    println("")
+    println("The programmible interrupt timer resolution exceeds 15 milliseconds!")
+    println(" ... accuracy of AccurateSleep is adversely affected.")
+    println(" ... see the AccurateSleep doc for corrective measures.")
+    println(" ... this is prevalent on the Windows OS.")
+    println(" ... opening AdobeReaderDC may maintain appropriate resoution.")
+    println(" ... opening Chrome may maintain appropriate resoution.")
+    println("")
+    return
 
   println("")
   gdir = Pkg.dir("AccurateSleep")
@@ -15,14 +27,6 @@ function DemoSuite()
   end
   close(f)
   sleep_ns(3.)
-  TimerOK = AccurateSleep.CheckInterruptTimer()
-  if TimerOK == false
-    println("The programmible interrupt timer resolution exceeds 15 milliseconds!")
-    println(" ... accuracy of AccurateSleep is adversely affected.")
-    println(" ... see the AccurateSleep doc for corrective measures.")
-    println(" ... opening AdobeReaderDC will maintain appropriate resoution.")
-    return
-  end
 
 
 
