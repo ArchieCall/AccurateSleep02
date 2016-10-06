@@ -29,7 +29,7 @@ function CheckInterruptTimer()
   if MeanDiff > .00165
     IsTimerValid = false
   end
-  if MaxDiff > .0055
+  if MaxDiff > .0090
     IsTimerValid = false
   end
   if IsTimerValid == false  #-- only print stats if false
