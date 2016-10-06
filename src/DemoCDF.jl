@@ -34,7 +34,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
 
       #--- stats for sleep
       if sleep_time < .001
-        actual_sleep_time = 10.000  #-- bogus time if less than .001
+        actual_sleep_time = 99.999999999  #-- bogus time if less than .001
       else
         begtime = time_ns()
         sleep(sleep_time)
@@ -51,7 +51,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
 
       #--- stats for Libc.systemsleep
       if sleep_time < .001
-        actual_sleep_time = 10.000  #-- bogus time if less than .001
+        actual_sleep_time = 99.999999999  #-- bogus time if less than .001
       else
         begtime = time_ns()
         Libc.systemsleep(sleep_time)

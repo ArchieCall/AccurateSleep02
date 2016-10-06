@@ -1,6 +1,4 @@
 module AccurateSleep
-println("AccurateSleep v.0005 dated 10-05-2016")
-
 function sleep_ns(sleep_time::AbstractFloat)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000.  #-- number of tics in one sec
