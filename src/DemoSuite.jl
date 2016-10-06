@@ -16,7 +16,7 @@ function DemoSuite()
   close(f)
   sleep_ns(3.)
   TimerOK = AccurateSleep.CheckInterruptTimer()
-  if TimerOK = false
+  if TimerOK == false
     println("The programmible interrupt timer resolution exceeds 15 milliseconds!")
     println(" ... accuracy of AccurateSleep is adversely affected.")
     println(" ... see the AccurateSleep doc for corrective measures.")
