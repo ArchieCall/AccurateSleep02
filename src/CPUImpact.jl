@@ -21,7 +21,7 @@ function CPUImpact()
       ActInnerBurnTime = NumInnerIters * st
       NumOuterIters = convert(Int, round(RunningSecs / InnerLoopTime))
       println("=====================================================================================")
-      @printf("check your CPU loading during the next %i loops /n", NumOuterIters)
+      @printf("check your CPU loading during the next %i loops \n", NumOuterIters)
       println("=====================================================================================")
       for ol in 1:NumOuterIters
         @printf("Loop => %3i  sleep_time = %11.6f secs   BurnLevel => %4.0f Percent\n", ol, st, bl )
