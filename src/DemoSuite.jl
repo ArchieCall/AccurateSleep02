@@ -1,5 +1,4 @@
 using BenchmarkTools
-end
 function DemoSuite()
   println("DemoSuite v.Suite005 dated 10-05-2016")
 
@@ -29,8 +28,6 @@ function DemoSuite()
   end
   close(f)
   sleep_ns(3.)
-
-
 
   println("================================================================")
   println("           Suite of various demo usages of AccurateSleep ")
