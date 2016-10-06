@@ -1,5 +1,4 @@
-function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer)
-  println("Demo2 v.3005 dated 10-05-2016")
+function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer)
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
@@ -34,10 +33,14 @@ function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integ
       end
 
       #--- stats for sleep
-      begtime = time_ns()
-      sleep(sleep_time)
-      endtime = time_ns()
-      actual_sleep_time = (endtime - begtime) / nanosecond
+      if sleep_time < .001
+        actual_sleep_time = 10.000  #-- bogus time if less than .001
+      else
+        begtime = time_ns()
+        sleep(sleep_time)
+        endtime = time_ns()
+        actual_sleep_time = (endtime - begtime) / nanosecond
+      end
       #actual_sleep_time -= overhead_time_ns  #-- substract off timing overhead
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
       DiffArray2[i] = diff_sleep_time
@@ -47,10 +50,14 @@ function Demo2(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integ
       end
 
       #--- stats for Libc.systemsleep
-      begtime = time_ns()
-      Libc.systemsleep(sleep_time)
-      endtime = time_ns()
-      actual_sleep_time = (endtime - begtime) / nanosecond
+      if sleep_time < .001
+        actual_sleep_time = 10.000  #-- bogus time if less than .001
+      else
+        begtime = time_ns()
+        Libc.systemsleep(sleep_time)
+        endtime = time_ns()
+        actual_sleep_time = (endtime - begtime) / nanosecond
+      end
       #actual_sleep_time -= overhead_time_ns  #-- substract off timing overhead
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
       DiffArray3[i] = diff_sleep_time

@@ -1,7 +1,5 @@
 using BenchmarkTools
 function DemoSuite()
-  println("DemoSuite v.Suite005 dated 10-05-2016")
-
   TimerOK = AccurateSleep.CheckInterruptTimer()
   if TimerOK == false
     println("")
@@ -64,11 +62,11 @@ function DemoSuite()
 
 
   println("\nVarious CDF reports")
-  AccurateSleep.Demo2(.001, 2, 1000)
+  AccurateSleep.DemoCDF(.001, 2, 1000)
   println("")
-  AccurateSleep.Demo2(.0001, 1, 5000)
+  AccurateSleep.DemoCDF(.0001, 1, 5000)
   println("")
-  AccurateSleep.Demo2(.000003, 1, 5000)
+  AccurateSleep.DemoCDF(.000003, 1, 5000)
 
 
   println(" ... DemoSuite has completed")
