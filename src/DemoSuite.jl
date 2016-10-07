@@ -7,7 +7,7 @@ function DemoSuite()
     println(" ... accuracy of AccurateSleep is adversely affected.")
     println(" ... see the AccurateSleep doc for corrective measures.")
     println(" ... this is prevalent on the Windows OS.")
-    println(" ... opening AdobeReaderDC, or Chrome may maintain appropriate resoution.")
+    println(" ... opening the Chrome browser may maintain appropriate resoution.")
     println("")
     return
   end
