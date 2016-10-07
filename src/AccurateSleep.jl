@@ -8,6 +8,7 @@ function sleep_ns(sleep_time::AbstractFloat)
   const min_sleep = .000003000    #-- 3 microsecond minimum
   nano1 = time_ns()  #-- get beginning time tic
   nano2 = nano1 + (sleep_time * tics_per_sec)  #-- final time tic that needs to be exceeded
+
   #-- validate the value of sleep_time
   if sleep_time < min_sleep
     @printf("parameter error:  sleep_time => %10.8f is less than %10.8f secs!!\n",
@@ -25,16 +26,15 @@ function sleep_ns(sleep_time::AbstractFloat)
 
   #--- calc sleeping time
   time_for_sleeping = 0.
-
   if sleep_time > burn_time_threshold
     time_for_sleeping = sleep_time - burn_time_threshold
   end
 
   if time_for_sleeping >= min_systemsleep
-    Libc.systemsleep(time_for_sleeping)
+    Libc.systemsleep(time_for_sleeping)  #-- sleep a portion of sleep_time
   end
 
-  #------ burn_time off time left after core sleep
+  #------ burn off remaining time in busy loop
   while true
     time_ns() >= nano2 && break
   end
@@ -49,7 +49,7 @@ if Pkg.installed("BenchmarkTools") !== nothing
   BenchmarkToolsInstalled = true
   include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
   include("DemoCDF.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-  include("CPUImpact.jl")  #-- demo CPU utilization
+  include("CheckCPUImpact.jl")  #-- demo CPU utilization
   include("CheckInterruptTimer.jl")  #-- check PIC
 else
   BenchmarkToolsInstalled = false

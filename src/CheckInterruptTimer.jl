@@ -9,10 +9,14 @@ function CheckInterruptTimer()
   WantedSleep = .001
   t1 = time_ns()
   sleep(WantedSleep) #--- dummy call to sleep to warm it up
-  sleep(WantedSleep) #--- dummy call to sleep to warm it up
-  sleep(WantedSleep) #--- dummy call to sleep to warm it up
-  sleep(WantedSleep) #--- dummy call to sleep to warm it up
   t2 = time_ns()
+  SleepTime = (t2-t1)/TicsPerSec
+  if SleepTime < .0027
+    return   #-- passes muster on a single check
+  end
+  sleep(WantedSleep) #--- dummy call to sleep to warm it up
+  sleep(WantedSleep) #--- dummy call to sleep to warm it up
+  sleep(WantedSleep) #--- dummy call to sleep to warm it up
   for i=1:NumIters
     t1 = time_ns()
     sleep(WantedSleep)
@@ -40,6 +44,7 @@ function CheckInterruptTimer()
 
   if IsTimerValid == false  #-- only print stats if false
     println("")
+    println("  Desired sleep time of .001 seconds is sleeping failing!")
     @printf("MeanTime => %11.9f   MeanTimeDiff => %11.9f \n", MeanTime, MeanDiff)
     @printf("MaxTime  => %11.9f   MaxDiff      => %11.9f \n", MaxTime, MaxDiff)
     @printf("MinTime  => %11.9f   MinDiff      => %11.9f \n", MinTime, MinDiff)

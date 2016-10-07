@@ -1,4 +1,4 @@
-function CPUImpact()
+function CheckCPUImpact()
   sleep(2.)  #-- wait until warnings completed
   sleep_ns(.5)
   function DummyCode(NumDummyLoops) #-- warm up sleep
