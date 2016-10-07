@@ -2,7 +2,6 @@ function CheckInterruptTimer()
   IsTimerValid = true
   TicsPerSec = 1_000_000_000.
 
-
   MaxTime = 0.
   MinTime = 999.
   SumTime = 0.
@@ -38,6 +37,7 @@ function CheckInterruptTimer()
   if MaxDiff > .0090
     IsTimerValid = false
   end
+
   if IsTimerValid == false  #-- only print stats if false
     println("")
     @printf("MeanTime => %11.9f   MeanTimeDiff => %11.9f \n", MeanTime, MeanDiff)
