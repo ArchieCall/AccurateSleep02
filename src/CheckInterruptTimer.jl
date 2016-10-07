@@ -44,7 +44,7 @@ function CheckInterruptTimer()
 
   if IsTimerValid == false  #-- only print stats if false
     println("")
-    println("  Desired sleep time of .001 seconds is sleeping failing!")
+    println("...  Desired sleep time of .001 seconds has failed! ...")
     @printf("MeanTime => %11.9f   MeanTimeDiff => %11.9f \n", MeanTime, MeanDiff)
     @printf("MaxTime  => %11.9f   MaxDiff      => %11.9f \n", MaxTime, MaxDiff)
     @printf("MinTime  => %11.9f   MinDiff      => %11.9f \n", MinTime, MinDiff)
