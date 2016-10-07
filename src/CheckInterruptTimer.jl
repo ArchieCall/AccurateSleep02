@@ -12,7 +12,7 @@ function CheckInterruptTimer()
   t2 = time_ns()
   SleepTime = (t2-t1)/TicsPerSec
   if SleepTime < .0027
-    return   #-- passes muster on a single check
+    return  IsTimerValid   #-- passes muster on a single check
   end
   sleep(WantedSleep) #--- dummy call to sleep to warm it up
   sleep(WantedSleep) #--- dummy call to sleep to warm it up
