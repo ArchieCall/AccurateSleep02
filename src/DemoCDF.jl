@@ -1,4 +1,18 @@
 function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer)
+  TotalLoops = numcycles * numloops
+  DurationSleep_ns = TotalLoops * (desired_sleep + .000005)
+  DurationSleep = 0.
+  DurationSystemSleep = 0.
+  if desired_sleep >= .001
+    DurationSleep = TotalLoops * (desired_sleep + .0014)
+    DurationSystemSleep = TotalLoops * (desired_sleep + .0009)
+  end
+  DurationAllSleeps = DurationSleep + DurationSleep_ns + DurationSystemSleep + 1.0
+  println("")
+  @printf("  Estimated time to run this CDF => %5.0f seconds\n", DurationAllSleeps)
+  sleep(.001)
+
+
   smean1 = 0.
   smean2 = 0.
   smean3 = 0.
