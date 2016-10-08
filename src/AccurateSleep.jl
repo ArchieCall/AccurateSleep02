@@ -34,10 +34,16 @@ function sleep_ns(sleep_time::AbstractFloat)
   end
 
   #------ burn off remaining time in busy loop
+  nano3 = time_ns()
   while true
-    time_ns() >= nano2 && break
+    nano3 = time_ns()
+    #time_ns() >= nano2 && break
+    if nano3 >= nano2
+      break
+    end
   end
-  return nothing
+  diff = ((nano3 - nano1) / tics_per_sec) - sleep_time
+  return diff
 end #-- end of sleep_ns
 export sleep_ns
 sleep(.001)  #--warmup
