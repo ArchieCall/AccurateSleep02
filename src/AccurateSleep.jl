@@ -50,6 +50,7 @@ if Pkg.installed("BenchmarkTools") !== nothing
   include("DemoCDF.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
   include("CheckCPUImpact.jl")  #-- demo CPU utilization
   include("CheckInterruptTimer.jl")  #-- check PIC
+  include("DemoStats.jl")  #-- check PIC
 else
   BenchmarkToolsInstalled = false
   println("\nThe package: 'BenchmarkTools' is not installed!")

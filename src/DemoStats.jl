@@ -1,4 +1,4 @@
-function DemoSleepNS(sleep_time::AbstractFloat)
+function DemoStats(sleep_time::AbstractFloat)
   TimerOK = AccurateSleep.CheckInterruptTimer()
   if TimerOK == false
     println("")
