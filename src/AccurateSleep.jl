@@ -47,10 +47,10 @@ sleep_ns(.001)  #--warmup
 BenchmarkToolsInstalled = true
 if Pkg.installed("BenchmarkTools") !== nothing
   BenchmarkToolsInstalled = true
-  include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-  include("DemoCDF.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
-  include("CheckCPUImpact.jl")  #-- demo CPU utilization
-  include("CheckInterruptTimer.jl")  #-- check PIC
+  #include("DemoSuite.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
+  #include("DemoCDF.jl")  #-- demo CDF's of sleep(), Libc.systemsleep(), sleep_ns
+  #include("CheckCPUImpact.jl")  #-- demo CPU utilization
+  #include("CheckInterruptTimer.jl")  #-- check PIC
 else
   BenchmarkToolsInstalled = false
   println("\nThe package: 'BenchmarkTools' is not installed!")
