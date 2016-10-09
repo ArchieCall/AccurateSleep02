@@ -42,8 +42,8 @@ function sleep_ns(sleep_time::AbstractFloat)
       break
     end
   end
-  diff = ((nano3 - nano1) / tics_per_sec) - sleep_time
-  return diff
+  ActualSleepTime = (nano3 - nano1) / tics_per_sec
+  return ActualSleepTime
 end #-- end of sleep_ns
 export sleep_ns
 sleep(.001)  #--warmup
@@ -57,6 +57,7 @@ if Pkg.installed("BenchmarkTools") !== nothing
   include("CheckCPUImpact.jl")  #-- demo CPU utilization
   include("CheckInterruptTimer.jl")  #-- check PIC
   include("DemoStats.jl")  #-- check PIC
+  include("Instructions.jl")  #-- check PIC
 else
   BenchmarkToolsInstalled = false
   println("\nThe package: 'BenchmarkTools' is not installed!")

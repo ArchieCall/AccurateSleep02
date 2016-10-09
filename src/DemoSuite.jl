@@ -12,31 +12,54 @@ function DemoSuite()
     return
   end
 
-  println("")
-  gdir = Pkg.dir("AccurateSleep")
-  SuiteName = gdir * "\\src\\" * "Instructions.txt"
-  f = open(SuiteName)
-  lines = readlines(f)
-  counter = 1
-  for l in lines
-    ll = chomp(l)
-    println(ll)
-    counter += 1
-  end
-  close(f)
-  sleep_ns(3.)
-
+  TicsPerSec = 1_000_000_000.
+  SuiteBegTic = time_ns()
   println("================================================================")
   println("           Suite of various demo usages of AccurateSleep ")
   println("================================================================")
   println("")
 
-  println("\nIf you want to skip rest of suite, press CTRL-C anytime!\n")
-  sleep_ns(5.)
+  println("Estimated running time:  => 85 seconds.")
+  sleep_ns(1.)
 
+
+  function ShowSleep(Sleep_Time)
+    if Sleep_Time >= .001
+      Tic1 = time_ns()
+      sleep(Sleep_Time)
+      Tic2 = time_ns()
+      ElapsedSleep = (Tic2 - Tic1) / TicsPerSec
+      @printf("sleep:              Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleep,  ElapsedSleep - Sleep_Time)
+
+      Tic1 = time_ns()
+      Libc.systemsleep(Sleep_Time)
+      Tic2 = time_ns()
+      ElapsedSleep = (Tic2 - Tic1) / TicsPerSec
+      @printf("Libc.systemsleep:   Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleep,  ElapsedSleep - Sleep_Time)
+    end
+
+    Tic1 = time_ns()
+    ElapsedSleepA = sleep_ns(Sleep_Time)
+    Tic2 = time_ns()
+    ElapsedSleep = (Tic2 - Tic1) / TicsPerSec
+    @printf("sleep_ns:           Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleep, ElapsedSleep - Sleep_Time)
+    @printf("sleep_ns A:         Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleepA, ElapsedSleepA - Sleep_Time)
+
+  end
   println("---- 6 sleep_ns() calls with various sleep times")
   println("---- integers are not accepeted")
-  @show sleep_ns(1.)
+  ShowSleep(1.)
+  ShowSleep(.1)
+  ShowSleep(.01)
+  ShowSleep(.005)
+  ShowSleep(.001)
+  ShowSleep(.001)
+  ShowSleep(.0005)
+  ShowSleep(.00005)
+  ShowSleep(.00001)
+  ShowSleep(.000005)
+  ShowSleep(.000003)
+  jjjj()
   @show sleep_ns(.01)
   @show sleep_ns(.001)
   @show sleep_ns(.0001)
@@ -67,8 +90,9 @@ function DemoSuite()
   AccurateSleep.DemoCDF(.0001, 1, 5000)
   println("")
   AccurateSleep.DemoCDF(.000003, 1, 5000)
-
-
-  println(" ... DemoSuite has completed")
+  SuiteEndTic = time_ns()
+  RunningSecs = (SuiteEndTic - SuiteBegTic) / TicsPerSec
+  println("")
+  @printf(" ... DemoSuite has completed:  running time => %3.0f seconds.\n", RunningSecs)
   println("")
 end

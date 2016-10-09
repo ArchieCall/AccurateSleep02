@@ -5,6 +5,7 @@ using AccurateSleep               :loads the Package
 sleep_ns(secs)                    :sleeps accurately for # of secs
 AccurateSleep.DemoSuite()         :showcases and contrasts sleep examples
 AccurateSleep.DemoCPULoad()       :repetitive sleeping to evaulate CPU loads
+AccurateSleep.Instructions()      :displays usage instructions
 AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
 
 
@@ -41,4 +42,5 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
 ------------------------------------------------------------------------------
  ... grinder to evaluate CPU loading under various sleep scenarios
 
-Please see https://github.com/ArchieCall/AccurateSleep for full docs
+Please see https://github.com/ArchieCall/AccurateSleep
+... full documentation in README.md

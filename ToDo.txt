@@ -1,5 +1,4 @@
 ---- todo for AccurateSleep
-. time() instead of time_ns() in busy loop
 . Intructions() function to print instructions
 . AccurateSleep.DemoStats() function
 . return Diff and false if Diff > .000006
