@@ -1,4 +1,4 @@
-function CheckCPUImpact(; SimSecs=20., Sleep=[.1, .05, .01, .008, .006, .005, .004, .003, .002, .001, .0005, .0001], Burn=[100., 50.])
+function CheckCPUImpact(; SimSecs=20., Sleep=[.05, .04, .03, .02, .01, .009, .008, .007, .006, .005, .004, .003, .0025, .0020, .0015 .0010, .0005], Burn=[100.])
   sleep(2.)  #-- wait until warnings completed
   sleep_ns(.5)  #-- warm up
   InnerLoopTime = 1.
