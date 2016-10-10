@@ -1,5 +1,2 @@
 ---- todo for AccurateSleep
-. Intructions() function to print instructions
-. AccurateSleep.DemoStats() function
-. return Diff and false if Diff > .000006
-. correct Diff when sleeping > 1 sec
+. Do not use .DemoStats function

@@ -20,7 +20,7 @@ function DemoSuite()
   println("")
 
   println("Estimated running time:  => 85 seconds.")
-  sleep_ns(1.)
+  sleep_ns(3.)
 
 
   function ShowSleep(Sleep_Time)
@@ -29,42 +29,53 @@ function DemoSuite()
       sleep(Sleep_Time)
       Tic2 = time_ns()
       ElapsedSleep = (Tic2 - Tic1) / TicsPerSec
-      @printf("sleep:              Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleep,  ElapsedSleep - Sleep_Time)
+      @printf("sleep:              Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n",
+      Sleep_Time, ElapsedSleep,  ElapsedSleep - Sleep_Time)
 
       Tic1 = time_ns()
       Libc.systemsleep(Sleep_Time)
       Tic2 = time_ns()
       ElapsedSleep = (Tic2 - Tic1) / TicsPerSec
-      @printf("Libc.systemsleep:   Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleep,  ElapsedSleep - Sleep_Time)
+      @printf("Libc.systemsleep:   Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n",
+      Sleep_Time, ElapsedSleep,  ElapsedSleep - Sleep_Time)
     end
 
     Tic1 = time_ns()
-    ElapsedSleepA = sleep_ns(Sleep_Time)
+    sleep_ns(Sleep_Time)
     Tic2 = time_ns()
     ElapsedSleep = (Tic2 - Tic1) / TicsPerSec
-    @printf("sleep_ns:           Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleep, ElapsedSleep - Sleep_Time)
-    @printf("sleep_ns A:         Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n", Sleep_Time, ElapsedSleepA, ElapsedSleepA - Sleep_Time)
+    @printf("sleep_ns:           Desired(secs) => %11.9f   Actual(secs) => %11.9f   Diff(secs) => %11.9f\n",
+    Sleep_Time, ElapsedSleep, ElapsedSleep - Sleep_Time)
 
   end
-  println("---- 6 sleep_ns() calls with various sleep times")
-  println("---- integers are not accepeted")
+  println("==========================================================================================================")
+  println("   Single sample calls to sleep(), Libc.systemsleep(), and sleep_ns()")
+  println("   Diff is the difference between Actual and Desired")
+  println("   Timing of the sleeps:  tics before and after the function call")
+  println("==========================================================================================================")
+  ShowSleep(2.)
+  println("----------------------------------------------------------------------------------------------------------")
   ShowSleep(1.)
+  println("----------------------------------------------------------------------------------------------------------")
   ShowSleep(.1)
+  println("----------------------------------------------------------------------------------------------------------")
   ShowSleep(.01)
+  println("----------------------------------------------------------------------------------------------------------")
+  ShowSleep(.0075)
+  println("----------------------------------------------------------------------------------------------------------")
   ShowSleep(.005)
+  println("----------------------------------------------------------------------------------------------------------")
+  ShowSleep(.0025)
+  println("----------------------------------------------------------------------------------------------------------")
   ShowSleep(.001)
-  ShowSleep(.001)
+  println("----------------------------------------------------------------------------------------------------------")
   ShowSleep(.0005)
+  ShowSleep(.0001)
   ShowSleep(.00005)
   ShowSleep(.00001)
   ShowSleep(.000005)
   ShowSleep(.000003)
-  jjjj()
-  @show sleep_ns(.01)
-  @show sleep_ns(.001)
-  @show sleep_ns(.0001)
-  @show sleep_ns(.00001)
-  @show sleep_ns(.000003)
+  println("----------------------------------------------------------------------------------------------------------")
 
   println("\n--- benchmark sleep of .001 secs")
   @show @benchmark sleep(.001)
