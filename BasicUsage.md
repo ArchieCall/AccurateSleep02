@@ -42,8 +42,8 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
 ------------------------------------------------------------------------------
   ... produces a detailed CDF report comparing: sleep, Libc.systemsleep, and sleep_ns
   ...if secs less than .001: systemsleep and sleep report bogus times of 10.000 secs
-  AccurateSleep.DemoCDF(.001, 3, 2000)      : sleeps .001 secs over 3 cycles with 2000 iters
-  AccurateSleep.DemoCDF(.000001, 1, 10000)  : sleeps .000003 secs for 1 cycle of 10000 iters
+  AccurateSleep.DemoCDF(.001, 3, 2000)           sleeps .001 secs over 3 cycles with 2000 iters
+  AccurateSleep.DemoCDF(.000001, 1, 10000)       sleeps .000003 secs for 1 cycle of 10000 iters
 ```
 
 ```
