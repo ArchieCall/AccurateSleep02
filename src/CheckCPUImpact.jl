@@ -1,12 +1,7 @@
-function CheckCPUImpact(; SimSecs=20., Sleep=[.1, .05, .0004], Burn=[100., 50., 25.])
+function CheckCPUImpact(; SimSecs=20., Sleep=[.1, .05, .01, .008, .006, .005, .004, .003, .002, .001, .0005, .0001], Burn=[100., 50.])
   sleep(2.)  #-- wait until warnings completed
   sleep_ns(.5)  #-- warm up
-  #SimSecs = 20.
   InnerLoopTime = 1.
-  #WantedSleep = [.1000, .0100, .0080, .0060, .0050, .0040, .0030, .0025, .0020, .0015]
-  #WantedSleep = [.0050, .0030, .0020, .0015, .0010]
-  #Sleep = [.0100, .0080, .0060]
-  #Burn = [100., 75., 50., 25., 1.]  #-- 100. = 100% burn, 50. = 50% burn
   for st in Sleep
     for bl in Burn
       InnerLoopPause = InnerLoopTime * (100. - bl)/100.
