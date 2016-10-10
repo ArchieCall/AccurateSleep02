@@ -52,6 +52,6 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
  ... grinder to evaluate CPU loading under various sleep scenarios
 ```
 
-Please see (README.md)
+Please see [masterfile](README.md)
 ... full documentation in README.md
 
