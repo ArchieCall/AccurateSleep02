@@ -53,6 +53,6 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
 ```
 
 ```
-Please see https://github.com/ArchieCall/AccurateSleep
+Please see [README.md](https://github.com/ArchieCall/AccurateSleep/README.md)
 ... full documentation in README.md
 ```
