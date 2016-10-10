@@ -52,6 +52,6 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
  ... grinder to evaluate CPU loading under various sleep scenarios
 ```
 
-Please see (https://github.com/ArchieCall/AccurateSleep/README.md)
+Please see (https://github.com/ArchieCall/AccurateSleep/blob/README.md)
 ... full documentation in README.md
 
