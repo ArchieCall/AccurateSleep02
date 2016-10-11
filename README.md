@@ -60,7 +60,7 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
 ### AccurateSleep.DemoCPULoad()
 ```
  ... grinder to evaluate CPU loading under various sleep scenarios
-```
+```coffee
 
 
 

@@ -1,2 +1,3 @@
 ---- todo for AccurateSleep
-. Do not use .DemoStats function
+Change Instructions name to BasicUsage
+Have BasicUsage only print BasicUsage portion of README.md
