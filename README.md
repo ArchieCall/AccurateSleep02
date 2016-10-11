@@ -168,8 +168,8 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 
 ***The impact of sleep_ns on computer cpu loading is summarized below***
 
-sleep_time   |        cpu load  
------------  |        --------  
+ sleep_time   |        cpu load  
+ -----------  |        --------  
   .0900 secs  |         0.1 %
   .0500 secs  |         0.1 %    
   .0400 secs  |         0.9 %
@@ -178,14 +178,15 @@ sleep_time   |        cpu load
   .0100 secs  |         2.5 %
   .0090 secs  |         3.5 %
   .0070 secs  |         4.5 %
-  .0060 secs  |         5.5 %
-  .0050 secs  |         6.5 %
+  .0060 secs  |         4.9 %
+  .0050 secs  |         6.0 %
   .0040 secs  |         8.5 %
   .0035 secs  |        12.0 %
   .0030 secs  |        12.0 %
   .0029 secs  |        22.0 %
   .0028 secs  |        22.0 %
   .0027 secs  |        22.0 %
+  .0026 secs  |        25.0 %
   .0025 secs  |        25.0 %
   .0023 secs  |        25.0 %
   .0020 secs  |        25.0 %
