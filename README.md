@@ -28,18 +28,18 @@ AccurateSleep.DemoCDF(secs, cycles, iters)     :computes CDF tables
 ```
 ### using AccurateSleep
 ```
-    loads AccurateSleep package and its functions
+* loads AccurateSleep module to make available its functions
  ```
 ### sleep_ns(secs::AbstractFloat)
 ```
- ... primary function within AccurateSleep
- ... accurately sleeps specified secs and returns nothing
- ... secs must be floating point - integers not allowed
- ... secs must be in range of .000001 to 84_400_000.
- sleep_ns(.5)                   : sleeps half second
- sleep_ns(.000005)              : sleeps 5 microseconds
- sleep_ns(5.)                   : sleeps 5 seconds
- sleep_ns(1)                    : errors out - not float"
+* primary function within AccurateSleep
+* accurately sleeps specified secs and returns nothing
+* secs must be floating point - integers not allowed
+* secs must be in range of .000001 to 84_400_000.
+* sleep_ns(.5)                sleeps half second
+* sleep_ns(.000005)           sleeps 5 microseconds
+* sleep_ns(5.)                sleeps 5 seconds
+* sleep_ns(1)                 errors out - not float"
  ```
 
 
