@@ -15,10 +15,11 @@ function ToyTimeStamp()
 
     DesiredSleep = SleepPerIter
     SavedTime = Array{Float64}(NumIters)
+    #SavedDesiredTime = Array{Float64}(NumIters)
     BeginSecTic = time_ns()  #-- assume this is beginning second
     for i in 1:NumIters
       if k == 1
-        #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
+        @printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
         sleep_ns(DesiredSleep)
         #Libc.systemsleep(DesiredSleep)
       else
