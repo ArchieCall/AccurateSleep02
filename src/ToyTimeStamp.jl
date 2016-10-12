@@ -5,7 +5,7 @@ function ToyTimeStamp()
 
   NumIters = 100
   SleepPerIter = 1./60.
-  for k = 1:2
+  for k = 1:1
     println("")
     if k == 1
       println("ToyTimeStamp for Libc.systemsleep() function")
