@@ -26,9 +26,9 @@ function ToyTimeStamp(NumSecs::Integer)
     for i in 1:NumSecs
       @printf("ElapsedTime => %12.9f\n", SavedTime[i])
     end
-    next k
-
-    print("")
-    return nothing
   end
-  using AccurateSleep
+
+  print("")
+  return nothing
+end
+using AccurateSleep
