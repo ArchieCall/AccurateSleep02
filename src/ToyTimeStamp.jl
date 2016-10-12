@@ -20,6 +20,7 @@ function ToyTimeStamp()
       if k == 1
         Libc.systemsleep(DesiredSleep)
       else
+        @printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
         sleep_ns(DesiredSleep)
       end
 
