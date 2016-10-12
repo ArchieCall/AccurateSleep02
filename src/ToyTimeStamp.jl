@@ -5,7 +5,7 @@ function ToyTimeStamp()
 
   NumIters = 100
   SleepPerIter = 1./60.
-  for k = 1:1
+  for k = 1:2
     println("")
     if k == 1
       println("ToyTimeStamp for Libc.systemsleep() function")
@@ -20,8 +20,7 @@ function ToyTimeStamp()
     for i in 1:NumIters
       if k == 1
         #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
-        sleep_ns(DesiredSleep)
-        #Libc.systemsleep(DesiredSleep)
+        Libc.systemsleep(DesiredSleep)
       else
         #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
         sleep_ns(DesiredSleep)
@@ -33,7 +32,7 @@ function ToyTimeStamp()
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumIters
-      @printf("ElapsedTime => %12.9f seconds\n", SavedTime[i])
+      @printf("ElapsedTime => %12.9f secs   Diff => @12.9f secs\n", SavedTime[i], SavedTime[i] - (i * SleepPerIter))
     end
   end
 
