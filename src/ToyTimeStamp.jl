@@ -4,9 +4,9 @@ function ToyTimeStamp(NumSecs::Integer)
   for k = 1:2
     println("")
     if k == 1
-      println("ToyTimeStamp for sleep")
+      println("ToyTimeStamp for Libc.systemsleep() function")
     else
-      println("ToyTimeStamp for sleep_ns")
+      println("ToyTimeStamp for sleep_ns() function")
     end
 
     DesiredSleep = 1.0
@@ -14,14 +14,14 @@ function ToyTimeStamp(NumSecs::Integer)
     BeginSecTic = time_ns()  #-- assume this is beginning second
     for i in 1:NumSecs
       if k == 1
-        sleep(DesiredSleep)
+        Libc.systemsleep(DesiredSleep)
       else
         sleep_ns(DesiredSleep)
       end
 
       EndSecTic = time_ns()
       ElapsedTime = (EndSecTic - BeginSecTic) / TicsPerSec
-      DesiredSleep = (i + 1.) - ElapsedTime - .000001
+      DesiredSleep = (i + 1.) - ElapsedTime - .0000018
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumSecs
