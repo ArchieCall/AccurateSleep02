@@ -2,6 +2,7 @@ function ToyTimeStamp(NumSecs::Integer)
   const TicsPerSec = 1_000_000_000
 
   for k = 1:2
+    println("")
     if k == 1
       println("ToyTimeStamp for sleep")
     else
@@ -24,7 +25,7 @@ function ToyTimeStamp(NumSecs::Integer)
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumSecs
-      @printf("ElapsedTime => %12.9f\n", SavedTime[i])
+      @printf("ElapsedTime => %12.9f seconds\n", SavedTime[i])
     end
   end
 
