@@ -1,7 +1,7 @@
 function ToyTimeStamp()
   const TicsPerSec = 1_000_000_000
-  #const OverheadSleepLoop = .000001300
-  const OverheadSleepLoop = .0
+  const OverheadSleepLoop = .000001300
+  #const OverheadSleepLoop = .0
 
   NumIters = 100
   SleepPerIter = 1./60.
@@ -32,7 +32,7 @@ function ToyTimeStamp()
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumIters
-      CumDesired = SaveTime[i] - (i * SleepPerIter)
+      CumDesired = SavedTime[i] - (i * SleepPerIter)
       @printf("ElapsedTime => %12.9f secs   Diff => %12.9f secs\n", SavedTime[i], CumDesired)
     end
   end
