@@ -19,7 +19,8 @@ function ToyTimeStamp()
     for i in 1:NumIters
       if k == 1
         #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
-        Libc.systemsleep(DesiredSleep)
+        sleep_ns(DesiredSleep)
+        #Libc.systemsleep(DesiredSleep)
       else
         #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
         sleep_ns(DesiredSleep)
