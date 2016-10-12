@@ -1,11 +1,12 @@
 module AccurateSleep
-function sleep_ns(sleep_time::AbstractFloat)
+function sleep_ns(sleep_time::Float64)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000  #-- number of tics in one sec
   const min_systemsleep = .001    #-- Libc.systemsleep min value - (If used)
   const max_sleep = 86_400_000.   #-- 1000 day maximum
   const min_sleep = .000001000    #-- 1 microsecond minimum
   BegTic = time_ns()  #-- get beginning time tic
+  sleep_time = convert(Float32, sleep_time)  #-- reduce precision so it will not wrap
   AddedTics = convert(UInt64, sleep_time * tics_per_sec)
   EndTic = BegTic + AddedTics  #-- final tic to equal or exceed in busy loop
   #-- validate the value of sleep_time
@@ -47,7 +48,7 @@ end #-- end of sleep_ns
 export sleep_ns
 sleep(.001)  #--warmup
 Libc.systemsleep(.001)  #--warmup
-sleep_ns(.001)  #--warmup
+#sleep_ns(.001)  #--warmup
 BenchmarkToolsInstalled = true
 if Pkg.installed("BenchmarkTools") !== nothing
   BenchmarkToolsInstalled = true
@@ -56,6 +57,7 @@ if Pkg.installed("BenchmarkTools") !== nothing
   include("CheckCPUImpact.jl")  #-- demo CPU utilization
   include("CheckInterruptTimer.jl")  #-- check PIC
   include("Instructions.jl")  #-- check PIC
+  include("ToyTimeStamp.jl")  #-- check PIC
 else
   BenchmarkToolsInstalled = false
   println("\nThe package: 'BenchmarkTools' is not installed!")
