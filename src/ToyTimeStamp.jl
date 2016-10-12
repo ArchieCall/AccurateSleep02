@@ -33,7 +33,7 @@ function ToyTimeStamp()
     end
     for i in 1:NumIters
       CumDesired = SaveTime[i] - (i * SleepPerIter)
-      @printf("ElapsedTime => %12.9f secs   Diff => @12.9f secs\n", SavedTime[i], CumDesired)
+      @printf("ElapsedTime => %12.9f secs   Diff => %12.9f secs\n", SavedTime[i], CumDesired)
     end
   end
 
