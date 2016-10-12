@@ -4,7 +4,7 @@ function ToyTimeStamp(NumSecs::Integer)
   for k = 1:2
     if k == 1
       println("ToyTimeStamp for sleep")
-    elseif
+    else
       println("ToyTimeStamp for sleep_ns")
     end
 
@@ -14,7 +14,7 @@ function ToyTimeStamp(NumSecs::Integer)
     for i in 1:NumSecs
       if k == 1
         sleep(DesiredSleep)
-      elseif
+      else
         sleep_ns(DesiredSleep)
       end
 
