@@ -21,7 +21,7 @@ function ToyTimeStamp(NumSecs::Integer)
 
       EndSecTic = time_ns()
       ElapsedTime = (EndSecTic - BeginSecTic) / TicsPerSec
-      DesiredSleep = (i + 1.) - ElapsedTime
+      DesiredSleep = (i + 1.) - ElapsedTime - .000001
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumSecs
