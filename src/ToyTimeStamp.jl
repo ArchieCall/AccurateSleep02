@@ -1,6 +1,6 @@
 function ToyTimeStamp(NumSecs::Integer)
   const TicsPerSec = 1_000_000_000
-
+  const OverheadSleepLoop = .000001300
   for k = 1:2
     println("")
     if k == 1
@@ -21,7 +21,7 @@ function ToyTimeStamp(NumSecs::Integer)
 
       EndSecTic = time_ns()
       ElapsedTime = (EndSecTic - BeginSecTic) / TicsPerSec
-      DesiredSleep = (i + 1.) - ElapsedTime - .0000018
+      DesiredSleep = (i + 1.) - ElapsedTime - OverheadSleepLoop
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumSecs
