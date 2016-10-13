@@ -16,9 +16,11 @@ function ToyTimeStamp()
 
   NumIters = 100
   SleepPerIter = 1./60.
-  for k = 1:2
+  for k = 1:3
     println("")
     if k == 1
+      println("ToyTimeStamp for sleep() function")
+    elseif k == 2
       println("ToyTimeStamp for Libc.systemsleep() function")
     else
       println("ToyTimeStamp for sleep_ns() function")
@@ -30,13 +32,12 @@ function ToyTimeStamp()
     BeginSecTic = time_ns()  #-- assume this is beginning second
     for i in 1:NumIters
       if k == 1
-        #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
-        Libc.systemsleep(DesiredSleep)
+        sleep(DesiredSleep)
+      elseif k == 2
+        Libc.systemsleep_ns(DesiredSleep)
       else
-        #@printf("DesiredSleep => %12.9f secs \n", DesiredSleep)
         sleep_ns(DesiredSleep)
       end
-
       EndSecTic = time_ns()
       ElapsedTime = (EndSecTic - BeginSecTic) / TicsPerSec
       DesiredSleep = ((i + 1.) * SleepPerIter) - ElapsedTime - OverheadSleepLoop
