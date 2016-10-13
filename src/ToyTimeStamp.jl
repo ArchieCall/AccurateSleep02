@@ -33,7 +33,7 @@ function ToyTimeStamp()
       if k == 1
         sleep(DesiredSleep)
       elseif k == 2
-        Libc.systemsleep_ns(DesiredSleep)
+        Libc.systemsleep(DesiredSleep)
       else
         sleep_ns(DesiredSleep)
       end
