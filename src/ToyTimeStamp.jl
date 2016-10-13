@@ -2,6 +2,17 @@ function ToyTimeStamp()
   const TicsPerSec = 1_000_000_000
   const OverheadSleepLoop = .000001300
   #const OverheadSleepLoop = .0
+  TimerOK = AccurateSleep.CheckInterruptTimer()
+  if TimerOK == false
+    println("")
+    println("The programmible interrupt timer resolution exceeds 15 milliseconds!")
+    println(" ... accuracy of AccurateSleep is adversely affected.")
+    println(" ... see the AccurateSleep doc for corrective measures.")
+    println(" ... this is prevalent on the Windows OS.")
+    println(" ... opening the Chrome browser may maintain appropriate resoution.")
+    println("")
+    return
+  end
 
   NumIters = 100
   SleepPerIter = 1./60.
