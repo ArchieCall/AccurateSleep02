@@ -28,7 +28,6 @@ function ToyTimeStamp()
 
     DesiredSleep = SleepPerIter
     SavedTime = Array{Float64}(NumIters)
-    #SavedDesiredTime = Array{Float64}(NumIters)
     BeginSecTic = time_ns()  #-- assume this is beginning second
     for i in 1:NumIters
       if k == 1
