@@ -1,7 +1,5 @@
 function ToyTimeStamp()
   const TicsPerSec = 1_000_000_000
-  const OverheadSleepLoop = .000001300
-  #const OverheadSleepLoop = .0
   TimerOK = AccurateSleep.CheckInterruptTimer()
   if TimerOK == false
     println("")
@@ -39,7 +37,7 @@ function ToyTimeStamp()
       end
       EndSecTic = time_ns()
       ElapsedTime = (EndSecTic - BeginSecTic) / TicsPerSec
-      DesiredSleep = ((i + 1.) * SleepPerIter) - ElapsedTime - OverheadSleepLoop
+      DesiredSleep = ((i + 1.) * SleepPerIter) - ElapsedTime
       SavedTime[i] = ElapsedTime
     end
     for i in 1:NumIters
