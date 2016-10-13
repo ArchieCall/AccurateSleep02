@@ -1,4 +1,16 @@
 function CheckCPUImpact(; SimSecs=20., Sleep=[.0060, .0050, .0040, .0035, .0030, .0029, .0028, .0027, .0026, .0025, .0023, .0020], Burn=[100.])
+  TimerOK = AccurateSleep.CheckInterruptTimer()
+  if TimerOK == false
+    println("")
+    println("The programmible interrupt timer resolution exceeds 15 milliseconds!")
+    println(" ... accuracy of AccurateSleep is adversely affected.")
+    println(" ... see the AccurateSleep doc for corrective measures.")
+    println(" ... this is prevalent on the Windows OS.")
+    println(" ... opening the Chrome browser may maintain appropriate resoution.")
+    println("")
+    return
+  end
+
   sleep(2.)  #-- wait until warnings completed
   sleep_ns(.5)  #-- warm up
   InnerLoopTime = 1.
