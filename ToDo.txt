@@ -1,7 +1,5 @@
 ---- todo for AccurateSleep
 Change Instructions name to BasicUsage
-Have BasicUsage only print BasicUsage portion of README.md
-In BasicUsage println("goto AccurateSleep.README.md")
 Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
-Toy program: print out time stamp every 1 second and print out stamp with
-  6 digits of subsecond precision
+sleep_ns: pass or fail based on diff by desired sleep
+sleep_ns Float32 on sleep_time

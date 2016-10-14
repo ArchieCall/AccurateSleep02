@@ -1,3 +1,4 @@
+#-- 10-14-2016
 module AccurateSleep
 function sleep_ns(sleep_time::Float64)
   const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
@@ -57,7 +58,7 @@ if Pkg.installed("BenchmarkTools") !== nothing
   include("CheckCPUImpact.jl")  #-- demo CPU utilization
   include("CheckInterruptTimer.jl")  #-- check PIC
   include("Instructions.jl")  #-- check PIC
-  include("ToyTimeStamp.jl")  #-- check PIC
+  include("ToyController.jl")  #-- check PIC
 else
   BenchmarkToolsInstalled = false
   println("\nThe package: 'BenchmarkTools' is not installed!")

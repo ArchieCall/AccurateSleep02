@@ -1,4 +1,4 @@
-function ToyTimeStamp()
+function ToyController()
   const TicsPerSec = 1_000_000_000
   TimerOK = AccurateSleep.CheckInterruptTimer()
   if TimerOK == false
@@ -11,30 +11,29 @@ function ToyTimeStamp()
     println("")
     return
   end
-
+  #--
   NumIters = 100
-  SleepPerIter = 1./60.
-  for k = 1:3
-    println("")
-    if k == 1
-      println("ToyTimeStamp for sleep() function")
-    elseif k == 2
-      println("ToyTimeStamp for Libc.systemsleep() function")
-    else
-      println("ToyTimeStamp for sleep_ns() function")
-    end
-
+  ProcessTime = 1./60.  #-- time of the process cycle (secs)
+  ProcessTolerance = .05  #-- percent + or - allowed for process to start
+  c = .01     #-- ControllerMean -> mean time that the process is controlled
+  cDiff = 1.  #-- ControllerMean varies uniformly about this percent diff
+  cMin = .5 * ProcessTime
+  cMax = .8 * ProcessTime
+  NumCSteps = 10
+  cStep = (cMax - cMin) / NumCSteps
+  for c = cMin:cStep:cMax
     DesiredSleep = SleepPerIter
     SavedTime = Array{Float64}(NumIters)
     BeginSecTic = time_ns()  #-- assume this is beginning second
     for i in 1:NumIters
-      if k == 1
-        sleep(DesiredSleep)
-      elseif k == 2
-        Libc.systemsleep(DesiredSleep)
-      else
-        sleep_ns(DesiredSleep)
-      end
+
+      #--- assume we have started a control task within the process cycle
+      cTimeMin = c * (1. - (.5 * cDiff /100.))
+      cTimeMax = c * (1. + (.5 * cDiff /100.))
+      cTime = cTimeMin + rand(cTimeMax - CTimeMin)
+
+      sleep_ns(DesiredSleep)
+      #--sleep(DesiredSleep)
       EndSecTic = time_ns()
       ElapsedTime = (EndSecTic - BeginSecTic) / TicsPerSec
       DesiredSleep = ((i + 1.) * SleepPerIter) - ElapsedTime
@@ -44,9 +43,8 @@ function ToyTimeStamp()
       CumDesired = SavedTime[i] - (i * SleepPerIter)
       @printf("ElapsedTime => %12.9f secs   Diff => %12.9f secs\n", SavedTime[i], CumDesired)
     end
-  end
+  end  #-- end of c loop
 
   print("")
   return nothing
-end
-using AccurateSleep
+end  #-- end of ToyController function
