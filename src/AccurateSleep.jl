@@ -1,7 +1,8 @@
 #-- 10-14-2016
 module AccurateSleep
 function sleep_ns(sleep_time::AbstractFloat)
-  const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
+  #const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
+  const burn_time_threshold = .02   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000  #-- number of tics in one sec
   const min_systemsleep = .001    #-- Libc.systemsleep min value - (If used)
   const max_sleep = 86_400_000.   #-- 1000 day maximum
