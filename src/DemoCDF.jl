@@ -44,6 +44,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
     max_diff2 = 0.
     max_diff3 = 0.
     sleep_time = desired_sleep
+    SkipSleepThreshold = .100
     for i in 1:numloops
 
       #--- stats for sleep_ns
@@ -59,7 +60,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
       end
 
       #--- stats for sleep
-      if sleep_time < .001
+      if sleep_time < SkipSleepThreshold
         actual_sleep_time = 99.999999999  #-- bogus time if less than .001
       else
         begtime = time_ns()
@@ -76,7 +77,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
       end
 
       #--- stats for Libc.systemsleep
-      if sleep_time < .001
+      if sleep_time < SkipSleepThreshold
         actual_sleep_time = 99.999999999  #-- bogus time if less than .001
       else
         begtime = time_ns()

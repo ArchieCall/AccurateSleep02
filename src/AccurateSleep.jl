@@ -14,9 +14,6 @@ function sleep_ns(sleep_time::AbstractFloat)
 
   AddedTics0 = round(sleep_time * tics_per_sec)
   AddedTics = convert(UInt64, AddedTics0)
-
-
-
   EndTic = BegTic + AddedTics  #-- final tic to equal or exceed in busy loop
   #-- validate the value of sleep_time
   if sleep_time < min_sleep
