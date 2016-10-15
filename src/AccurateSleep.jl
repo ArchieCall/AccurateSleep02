@@ -6,7 +6,7 @@ function sleep_ns(sleep_time::AbstractFloat)
   const max_sleep = 86_400_000.       #-- maximum allowed sleep_time (secs)
   const burn_threshold = .0015   #-- time reserved For burning (secs)
   const min_systemsleep = .0010        #-- time below which Libc.systemsleep has no accuracy
-  const diff_limit = .00002        #-- time below which Libc.systemsleep has no accuracy #const diff_limit = .00010        #-- diffs exceeding this time limit force error message
+  const diff_limit = .00004        #-- time below which Libc.systemsleep has no accuracy #const diff_limit = .00010        #-- diffs exceeding this time limit force error message
   BegTic = time_ns()  #-- get beginning time tic
   AddedTics0 = round(sleep_time * tics_per_sec)  #-- eliminate fractional tics
   AddedTics = convert(UInt64, AddedTics0)        #-- convert to UInt64
