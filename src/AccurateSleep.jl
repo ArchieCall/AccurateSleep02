@@ -1,15 +1,17 @@
 #-- 10-15-2016
 module AccurateSleep
-function sleep_ns(sleep_time::AbstractFloat, threshold = .019)
+function sleep_ns(sleep_time::AbstractFloat)
   const tics_per_sec = 1_000_000_000  #-- number of tics in one sec
   const min_sleep = .000001000        #-- minimum allowed sleep_time (secs)
   const max_sleep = 86_400_000.       #-- maximum allowed sleep_time (secs)
-  #const threshold = .0015   #-- time reserved For burning (secs)
-  const min_systemsleep = .001        #-- time below which Libc.systemsleep is not used
+  const burn_threshold = .0015   #-- time reserved For burning (secs)
+  const min_systemsleep = .0010        #-- time below which Libc.systemsleep has no accuracy
+  const diff_limit = .00002        #-- time below which Libc.systemsleep has no accuracy #const diff_limit = .00010        #-- diffs exceeding this time limit force error message
   BegTic = time_ns()  #-- get beginning time tic
   AddedTics0 = round(sleep_time * tics_per_sec)  #-- eliminate fractional tics
   AddedTics = convert(UInt64, AddedTics0)        #-- convert to UInt64
   EndTic = BegTic + AddedTics  #-- final tic to equal or exceed in busy loop
+
   #-- validate the value of sleep_time
   if sleep_time < min_sleep
     @printf("parameter error:  sleep_time => %10.8f is less than %10.8f secs!!\n",
@@ -17,7 +19,6 @@ function sleep_ns(sleep_time::AbstractFloat, threshold = .019)
     println("program halted.")
     SpecifiedSleepTooLow()
   end
-
   if sleep_time > max_sleep
     @printf("parameter error:  sleep_time => %12.1f is greater than %10.1f secs!!\n",
     sleep_time, max_sleep)
@@ -27,10 +28,11 @@ function sleep_ns(sleep_time::AbstractFloat, threshold = .019)
 
   #--- calc sleeping time
   time_for_sleeping = 0.
-  if sleep_time > threshold
-    time_for_sleeping = sleep_time - threshold
+  if sleep_time > burn_threshold
+    time_for_sleeping = sleep_time - burn_threshold
   end
 
+  #-- sleep a fraction of total sleep_time
   if time_for_sleeping >= min_systemsleep
     Libc.systemsleep(time_for_sleeping)  #-- sleep a portion of sleep_time
   end
@@ -43,12 +45,19 @@ function sleep_ns(sleep_time::AbstractFloat, threshold = .019)
     end
     CurrTic = time_ns()
   end
-  ActualSleepTime = (CurrTic - BegTic) / tics_per_sec
-  Diff = ActualSleepTime - sleep_time
+  ActualSleep = (CurrTic - BegTic) / tics_per_sec
+  Diff = ActualSleep - sleep_time
 
-  if Diff > .005
-    @printf("Interrupt timer is set too high!    Diff => %12.9f seconds\n", Diff)
-    StoppedBecauseInterruptTimerSetTooHigh()
+  if Diff > diff_limit
+    println("========================== sleep_ns error!! =========================================")
+    @printf("diff_limit => %12.9f secs has been exceeded!\n", diff_limit)
+    @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", sleep_time, ActualSleep, Diff)
+    println("Your computer is currently slow, or 'Interrupt Timer Interval' is set too high.")
+    println("Leaving the Chrome browser open can maintain this timer at a lower level.")
+    println("See the README.md for further information.")
+    println("=====================================================================================")
+    #StoppedBecauseInterruptTimerIsSetTooHigh()  #-- undefined function to cause program stop
+    #quit()
   end
   return nothing
 end #-- end of sleep_ns

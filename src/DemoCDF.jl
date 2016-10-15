@@ -1,4 +1,4 @@
-function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer, threshold)
+function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Integer)
   TimerOK = AccurateSleep.CheckInterruptTimer()
   if TimerOK == false
     println("")
@@ -49,7 +49,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
 
       #--- stats for sleep_ns
       begtime = time_ns()
-      sleep_ns(sleep_time, threshold)
+      sleep_ns(sleep_time)
       endtime = time_ns()
       actual_sleep_time = (endtime - begtime) / nanosecond
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
