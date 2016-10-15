@@ -171,6 +171,11 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
     @printf("     Mean    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", a1,a2,a3, mean1, mean2, mean3  )
     @printf("  ExpMean    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", sa1, sa2, sa3, smean1, smean2, smean3)
     @printf(" Max99.99    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", xa1, xa2, xa3, maxBin1, maxBin2, maxBin3)
+    mx1 = st + max_diff1
+    mx2 = st + max_diff2
+    mx3 = st + max_diff3
+    @printf(" Maximum     %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", mx1, mx2, mx3, max_diff1, max_diff2, max_diff3)
+
     println("=========================================================================================================")
   end
 end
