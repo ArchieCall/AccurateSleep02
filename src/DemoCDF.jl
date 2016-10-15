@@ -31,6 +31,8 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
   maxBin1 = 0.
   maxBin2 = 0.
   maxBin3 = 0.
+  sleep_ns(.003)  #--- warm up sleep_ns
+  println("dummy warm up of sleep_ns has completed.")
   for cy in 1:numcycles
     DiffArray1 = zeros(AbstractFloat, numloops)
     DiffArray2 = zeros(AbstractFloat, numloops)
