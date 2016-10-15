@@ -4,9 +4,11 @@ function sleep_ns(sleep_time::AbstractFloat)
   const tics_per_sec = 1_000_000_000  #-- number of tics in one sec
   const min_sleep = .000001000        #-- minimum allowed sleep_time (secs)
   const max_sleep = 86_400_000.       #-- maximum allowed sleep_time (secs)
-  const burn_threshold = .0015   #-- time reserved For burning (secs)
-  const min_systemsleep = .0010        #-- time below which Libc.systemsleep has no accuracy
-  const diff_limit = .00004        #-- time below which Libc.systemsleep has no accuracy #const diff_limit = .00010        #-- diffs exceeding this time limit force error message
+  const burn_threshold = .0015     #-- time reserved For burning (secs)
+  const min_systemsleep = .0010    #-- time below which Libc.systemsleep has no accuracy
+  const diff_limit = .00004        #-- time below which Libc.systemsleep has no accuracy #const diff_limit = .00010
+  const ShowErrors = false         #-- if error, display error message
+
   BegTic = time_ns()  #-- get beginning time tic
   AddedTics0 = round(sleep_time * tics_per_sec)  #-- eliminate fractional tics
   AddedTics = convert(UInt64, AddedTics0)        #-- convert to UInt64
@@ -47,19 +49,23 @@ function sleep_ns(sleep_time::AbstractFloat)
   end
   ActualSleep = (CurrTic - BegTic) / tics_per_sec
   Diff = ActualSleep - sleep_time
-
+  SleepOK = true
+  
   if Diff > diff_limit
-    println("========================== sleep_ns error!! =========================================")
-    @printf("diff_limit => %12.9f secs has been exceeded!\n", diff_limit)
-    @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", sleep_time, ActualSleep, Diff)
-    println("Your computer is currently slow, or 'Interrupt Timer Interval' is set too high.")
-    println("Leaving the Chrome browser open can maintain this timer at a lower level.")
-    println("See the README.md for further information.")
-    println("=====================================================================================")
-    #StoppedBecauseInterruptTimerIsSetTooHigh()  #-- undefined function to cause program stop
-    #quit()
+    SleepOK = false
+    if ShowErrors
+      println("========================== sleep_ns error!! =========================================")
+      @printf("diff_limit => %12.9f secs has been exceeded!\n", diff_limit)
+      @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", sleep_time, ActualSleep, Diff)
+      println("Your computer is currently slow, or 'Interrupt Timer Interval' is set too high.")
+      println("Leaving the Chrome browser open can maintain this timer at a lower level.")
+      println("See the README.md for further information.")
+      println("=====================================================================================")
+      #StoppedBecauseInterruptTimerIsSetTooHigh()  #-- undefined function to cause program stop
+      #quit()
+    end
   end
-  return nothing
+  return SleepOK
 end #-- end of sleep_ns
 export sleep_ns
 sleep(.001)  #--warmup
