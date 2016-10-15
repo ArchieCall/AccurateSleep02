@@ -1,18 +1,12 @@
 #-- 10-14-2016
 module AccurateSleep
 function sleep_ns(sleep_time::AbstractFloat)
-  #const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
-  const burn_time_threshold = .02   #-- time in seconds that is reserved For burning
+  const burn_time_threshold = .0019   #-- time in seconds that is reserved For burning
   const tics_per_sec = 1_000_000_000  #-- number of tics in one sec
   const min_systemsleep = .001    #-- Libc.systemsleep min value - (If used)
   const max_sleep = 86_400_000.   #-- 1000 day maximum
-  #const min_sleep = .000001000    #-- 1 microsecond minimum
-  const min_sleep = .000000001    #-- 1 microsecond minimum
+  const min_sleep = .000001000    #-- 1 microsecond minimum
   BegTic = time_ns()  #-- get beginning time tic
-
-  #sleep_time = convert(Float32, sleep_time)  #-- reduce precision so it will not wrap
-  #AddedTics = convert(UInt64, sleep_time * tics_per_sec)
-
   AddedTics0 = round(sleep_time * tics_per_sec)
   AddedTics = convert(UInt64, AddedTics0)
   EndTic = BegTic + AddedTics  #-- final tic to equal or exceed in busy loop
@@ -53,7 +47,7 @@ function sleep_ns(sleep_time::AbstractFloat)
   Diff = ActualSleepTime - sleep_time
 
   if Diff > .005
-    @printf("Interrupt timer is set too high  Diff => %12.9f\n", Diff)
+    @printf("Interrupt timer is set too high!    Diff => %12.9f seconds\n", Diff)
     StoppedBecauseInterruptTimerSetTooHigh()
   end
 
