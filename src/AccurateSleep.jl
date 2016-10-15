@@ -1,6 +1,6 @@
 #-- 10-15-2016
 module AccurateSleep
-function sleep_ns(sleep_time::AbstractFloat, threshold = .0015)
+function sleep_ns(sleep_time::AbstractFloat, threshold = .019)
   const tics_per_sec = 1_000_000_000  #-- number of tics in one sec
   const min_sleep = .000001000        #-- minimum allowed sleep_time (secs)
   const max_sleep = 86_400_000.       #-- maximum allowed sleep_time (secs)
