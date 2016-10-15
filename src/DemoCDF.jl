@@ -45,13 +45,14 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
     max_diff1 = 0.
     max_diff2 = 0.
     max_diff3 = 0.
+    cnt_errs = 0
     sleep_time = desired_sleep
     SkipSleepThreshold = .100
     for i in 1:numloops
 
       #--- stats for sleep_ns
       begtime = time_ns()
-      sleep_ns(sleep_time)
+      SleepOK = sleep_ns(sleep_time)
       endtime = time_ns()
       actual_sleep_time = (endtime - begtime) / nanosecond
       diff_sleep_time = abs(actual_sleep_time - sleep_time)
@@ -59,6 +60,9 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
       sum1 += diff_sleep_time
       if diff_sleep_time > max_diff1
         max_diff1 = diff_sleep_time
+      end
+      if !SleepOK
+        cnt_errs += 1
       end
 
       #--- stats for sleep
@@ -177,7 +181,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
     mx2 = st + max_diff2
     mx3 = st + max_diff3
     @printf(" Maximum     %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", mx1, mx2, mx3, max_diff1, max_diff2, max_diff3)
-
+    @printf(" Error Cnt   %i\n", cnt_errs)
     println("=========================================================================================================")
   end
 end
