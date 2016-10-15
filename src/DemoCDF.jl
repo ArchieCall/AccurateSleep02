@@ -181,7 +181,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numcycles::Integer, numloops::Int
     mx2 = st + max_diff2
     mx3 = st + max_diff3
     @printf(" Maximum     %12.9f    %12.9f    %12.9f    %12.9f    %12.9f    %12.9f\n", mx1, mx2, mx3, max_diff1, max_diff2, max_diff3)
-    @printf(" Error Cnt   %i\n", cnt_errs)
+    @printf(" Error Count   %i\n", cnt_errs)
     println("=========================================================================================================")
   end
 end
