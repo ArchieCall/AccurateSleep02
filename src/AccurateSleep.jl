@@ -5,7 +5,7 @@ function sleep_ns(SleepTime::AbstractFloat)
   const TicsPerSec = 1_000_000_000   #-- number of tics in one sec
   const MinSleep = .000001000        #-- minimum allowed SleepTime (secs)
   const MaxSleep = 1_000_000.        #-- maximum allowed SleepTime (secs)
-  const BurnThreshold = .0013        #-- time reserved For burning (secs)
+  const BurnThreshold = .0015        #-- time reserved For burning (secs)
   const MinLibcSystemSleep = .0010   #-- time below which Libc.systemsleep has no accuracy (secs)
   const DiffLimit = .00004           #-- error returned, if Diff above this limit (secs)
   const ShowErrors = false           #-- display error messages if true (bool)
