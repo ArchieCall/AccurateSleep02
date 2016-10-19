@@ -209,45 +209,6 @@ I do not know the reason why? Possibly it is part and parcel of the ccall operat
 Since sleep-ns() makes use of sleep(), this extra alloction follows thru to each sleep_ns() call
 whenever the sleep_time is in excess of .0023000 seconds.
 ```
----------------  
-### Functions
-***sleep_ns()***
-```
-stand alone function that performs a hybrid sleep
-uses a combination of standard sleep() and final burn cycle
-does not depand on any Packages and uses 100% julia code
-```
-***simple_compare()***
-```
-compares sleep() and sleep_ns for only one sleep_time
-```
-***detail_compare()***
-```
-compares sleep() and sleep_ns for multple sleep_time's
-produces probability density function & cumulative density functions
-```
-***six_sleeps()***
-```
-performs six calls to sleep_ns() using a graded series of sleep_times's
-```
-
- ***The AccurateSleep.jl is comprised of the following:***
- * module NewSleep
-   * sleep_ns() function
-   * simple_compare() function
-   * detail_compare() function
-   * ten_sleeps() function
-   * interval_function_caller function
-   * do_something function
- * module Mainline
-   * import NewSleep.sleep_ns
-   * import NewSleep.simple_compare
-   * import NewSleep.detail_compare
-   * import NewSleep.ten_sleeps
-   * import NewSleep.interval_function_caller
-   * import NewSleep.do_something
-   * runs examples showing sleep_ns in action
- *
 
 ## Possible use of sleep_ns in parallel operation
 ```

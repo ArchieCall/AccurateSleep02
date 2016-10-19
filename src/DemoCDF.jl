@@ -12,7 +12,8 @@ function DemoCDF(desired_sleep::AbstractFloat, numloops::Integer)
   end
 
   TotalLoops =  numloops
-  DurationSleep_ns = TotalLoops * (desired_sleep + .000005)
+  #DurationSleep_ns = TotalLoops * (desired_sleep + .000005)
+  DurationSleep_ns = TotalLoops * (desired_sleep + .0000017)
   DurationSleep = 0.
   DurationSystemSleep = 0.
   if desired_sleep >= .001

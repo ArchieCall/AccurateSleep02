@@ -1,5 +1,4 @@
 ---- todo for AccurateSleep
 Change Instructions name to BasicUsage
 Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
-sleep_ns: pass or fail based on diff by desired sleep
-sleep_ns Float32 on sleep_time
+Two levels of Diff errors: DiffLimitLo and DiffLimitHi
