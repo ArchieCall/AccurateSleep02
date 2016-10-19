@@ -153,7 +153,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
     * if delta equal or exceeds .00800 then, sleep_ns() is done
   * delta returned is returned
 
-```
+```AccurateSleep.js
 function sleep_ns(SleepTime::AbstractFloat)
   #----- accurately block the current task for SleepTime (secs) ---------
 
