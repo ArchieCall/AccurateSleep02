@@ -156,24 +156,28 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 -----------
 ## how sleep_ns works better explanation
 ```Julia
-SleepTime is the desired sleep time in seconds
-BurnThreshold is a constant of .0019 seconds
-MinLibcSystemSleep is a constant of .0010 seconds
-DiffLimitLo is a constant of .00006 seconds
-DiffLimitHi is a constant of .00500 seconds
-TicsPerSec is a constant of 1_000_000_000
+sleep_ns(SleepTime)    #-- SleepTime is the desired sleep (secs)
+const BurnThreshold = .0019       #-- time reserved for burning (secs)
+const MinLibcSystemSleep = .0010  #-- Libc.systemsleep accuracy limit (secs)
+const DiffLimitLo = .00006        #-- normal diff error limit (secs)
+const DiffLimitHi = .00500        #-- excessive diff error limit (secs)
+const TicsPerSec = 1_000_000_000  #-- number of tics in a second
 BegTic = time_ns()   #-- gets beginning time tic
-SleepTimeTics = SleepTime * TicsPerSec
-EndTic = BegTic + SleepTimeTics
-TimeToSleep = SleepTime - BurnThreshold
-if TimeToSleep >= MinLibcSystemSleep then
+SleepTimeTics = SleepTime * TicsPerSec  #-- added time tics for sleeping
+EndTic = BegTic + SleepTimeTics         #-- ending time tic
+TimeToSleep = SleepTime - BurnThreshold  #-- calc time for a true sleep
+if TimeToSleep >= MinLibcSystemSleep
   Libc.systemsleep(TimeToSleep)  #-- sleep a fraction of SleepTime
+end
 CurrTic = time_ns()  #-- get current time tic in while loop
-break out of while loop when CurrTic >= EndTic
+while true
+  CurrTic > EndTic && break
+  CurrTic = time_ns()
+end
 ActualSleepTime = (CurrTic - BegTic) / TicsPerSec
 Diff = ActualSleepTime - SleepTime
-if Diff > DiffLimitLo then return false
-if Diff > DiffLimitHi then print a limit error message and return false
+if Diff > DiffLimitHi; println("error"); return false
+if Diff > DiffLimitLo; return false
 ```
 
 -------------
