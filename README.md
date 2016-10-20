@@ -155,24 +155,26 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 
 -----------
 ## how sleep_ns works better explanation
-* SleepTime is the desired sleep time in seconds
-* BurnThreshold is a constant of .0019 seconds
-* MinLibcSystemSleep is a constant of .0010 seconds
-* DiffLimitLo is a constant of .00006 seconds
-* DiffLimitHi is a constant of .00500 seconds
-* TicsPerSec is a constant of 1_000_000_000
-* BegTic = time_ns()   #-- gets beginning time tic
-* SleepTimeTics = SleepTime * TicsPerSec
-* EndTic = BegTic + SleepTimeTics
-* TimeToSleep = SleepTime - BurnThreshold
-* if TimeToSleep >= MinLibcSystemSleep then
- * Libc.systemsleep(TimeToSleep)  #-- sleep a fraction of SleepTime
-* CurrTic = time_ns()  #-- get current time tic in while loop
-* break out of while loop when CurrTic >= EndTic
-* ActualSleepTime = (CurrTic - BegTic) / TicsPerSec
-* Diff = ActualSleepTime - SleepTime
-* if Diff > DiffLimitLo then return false
-* if Diff > DiffLimitHi then print a limit error message and return false
+```Julia
+SleepTime is the desired sleep time in seconds
+BurnThreshold is a constant of .0019 seconds
+MinLibcSystemSleep is a constant of .0010 seconds
+DiffLimitLo is a constant of .00006 seconds
+DiffLimitHi is a constant of .00500 seconds
+TicsPerSec is a constant of 1_000_000_000
+BegTic = time_ns()   #-- gets beginning time tic
+SleepTimeTics = SleepTime * TicsPerSec
+EndTic = BegTic + SleepTimeTics
+TimeToSleep = SleepTime - BurnThreshold
+if TimeToSleep >= MinLibcSystemSleep then
+  Libc.systemsleep(TimeToSleep)  #-- sleep a fraction of SleepTime
+CurrTic = time_ns()  #-- get current time tic in while loop
+break out of while loop when CurrTic >= EndTic
+ActualSleepTime = (CurrTic - BegTic) / TicsPerSec
+Diff = ActualSleepTime - SleepTime
+if Diff > DiffLimitLo then return false
+if Diff > DiffLimitHi then print a limit error message and return false
+```
 
 -------------
 ## sleep_ns function
