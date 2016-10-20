@@ -43,10 +43,9 @@ function sleep_ns(SleepTime::AbstractFloat)
   end
 
   #----- compute the ending time tic ----------------------------------------
-  #-- added tics are those needed for SleepTime secs
-  AddedTics1 = round(SleepTime * TicsPerSec)    #-- eliminate fractional tics
-  AddedTics2 = convert(UInt64, AddedTics1)      #-- convert to UInt64
-  EndTic = BegTic + AddedTics2      #-- time tic for breaking out of burn loop
+  SleepTimeTics0 = round(SleepTime * TicsPerSec)    #-- eliminate fractional tics
+  SleepTimeTics = convert(UInt64, SleepTimeTics0)  #-- convert to UInt64
+  EndTic = BegTic + SleepTimeTics      #-- time tic for breaking out of burn loop
 
   #----- calc how much time to sleep ----------------------------------
   TimeToSleep = 0.
