@@ -1,4 +1,4 @@
-#-- 10-19-2016
+#-- 10-20-2016
 module AccurateSleep
 function sleep_ns(SleepTime::AbstractFloat)
   #----- accurately block the current task for SleepTime (secs) ---------
@@ -12,10 +12,10 @@ function sleep_ns(SleepTime::AbstractFloat)
   const DiffLimitLo = .00006         #-- normal diff error limit (secs)
   const DiffLimitHi = .00500         #-- excessive diff error limit (secs)
   const ShowErrors = false           #-- display error messages, if true (bool)
-  const ShowDiffErrorsLo = true     #-- display error messages, if true (bool)
-  const ShowDiffErrorsHi = true     #-- display error messages, if true (bool)
-  const QuitOnDiffError = false      #-- quit on Diff error, if true (bool)
-  const QuitOnParmError = false      #-- quit on Parm error, if true (bool)
+  const ShowDiffErrorsLo = false     #-- display error messages, if true (bool)
+  const ShowDiffErrorsHi = true      #-- display error messages, if true (bool)
+  const QuitOnDiffError = false      #-- quit Julia on Diff error, if true (bool)
+  const QuitOnParmError = false      #-- quit Julia on Parm error, if true (bool)
 
   #----- get the initial time tic -------------------------------------------
   BegTic = time_ns()   #-- beginning time tic
@@ -43,7 +43,7 @@ function sleep_ns(SleepTime::AbstractFloat)
   end
 
   #----- compute the ending time tic ----------------------------------------
-  #-- AddedTics represent SleepTime
+  #-- added tics are those needed for SleepTime secs
   AddedTics1 = round(SleepTime * TicsPerSec)    #-- eliminate fractional tics
   AddedTics2 = convert(UInt64, AddedTics1)      #-- convert to UInt64
   EndTic = BegTic + AddedTics2      #-- time tic for breaking out of burn loop
