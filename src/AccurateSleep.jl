@@ -48,7 +48,7 @@ function sleep_ns(SleepSecs::AbstractFloat)
   EndTic = BegTic + SleepTics      #-- time tic for breaking out of burn loop
 
   #----- calc how much time to sleep ----------------------------------
-  TimeToSleep = 0.
+  SystemSleepSecs = 0.
   if SleepSecs > BurnThreshold  #-- do not sleep if below the burn threshold
     SystemSleepSecs = SleepSecs - BurnThreshold
   end
