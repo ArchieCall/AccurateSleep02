@@ -2,4 +2,16 @@
 Change Instructions name to BasicUsage
 Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
 Two levels of Diff errors: DiffLimitLo and DiffLimitHi
-put sleep_ns function detail in todo.md
+put sleep_ns function detail in README.md
+Method for accuracy on 32 bit system
+  BigInt?
+Possible names for sleep details
+   SleepTime
+   WaitTime
+   PauseTime
+   SuspendTime
+   BlockTime
+   BurnTime
+   BusyWaitTime
+   IdleTime
+     all of the above with Secs instead of Time

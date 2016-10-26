@@ -1,14 +1,14 @@
-#-- 10-20-2016
+#-- 10-26-2016
 module AccurateSleep
-function sleep_ns(SleepTime::AbstractFloat)
+function sleep_ns(SleepSecs::AbstractFloat)
   #----- accurately block the current task for SleepTime (secs) ---------
 
   #------ constants ------------------------------------------------------
   const TicsPerSec = 1_000_000_000   #-- number of time tics in one sec
-  const MinSleep = .000001000        #-- minimum allowed SleepTime (secs)
-  const MaxSleep = 4.0               #-- maximum allowed SleepTime (secs)
+  const MinSleepSecs = .000001000    #-- minimum allowed SleepTime (secs)
+  const MaxSleepSecs = 4.0           #-- maximum allowed SleepTime (secs)
   const BurnThreshold = .0019        #-- time reserved For burning (secs)
-  const MinLibcSystemSleep = .0010   #-- min accuracy limit of Libc.systemsleep (secs)
+  const MinSystemSleepSecs = .0010   #-- min accuracy limit of Libc.systemsleep (secs)
   const DiffLimitLo = .00006         #-- normal diff error limit (secs)
   const DiffLimitHi = .00500         #-- excessive diff error limit (secs)
   const ShowErrors = false           #-- display error messages, if true (bool)
@@ -22,14 +22,14 @@ function sleep_ns(SleepTime::AbstractFloat)
 
   #----- validate that SleepTime is within min to max range -----------------
   ParmOK = true
-  if SleepTime < MinSleep
+  if SleepSecs < MinSleepSecs
     @printf("ParmError::  SleepTime: %10.9f is less than allowed min of %10.8f secs!!\n",
-    SleepTime, MinSleep)
+    SleepSecs, MinSleepSecs)
     ParmOK = false
   end
-  if SleepTime > MaxSleep
+  if SleepSecs > MaxSleepSecs
     @printf("ParmError::  SleepTime: %12.1f is greater allowed max of %10.1f secs!!\n",
-    SleepTime, MaxSleep)
+    SleepSecs, MaxSleepSecs)
     ParmOK = false
   end
   if !ParmOK
@@ -43,19 +43,19 @@ function sleep_ns(SleepTime::AbstractFloat)
   end
 
   #----- compute the ending time tic ----------------------------------------
-  SleepTimeTics0 = round(SleepTime * TicsPerSec)    #-- eliminate fractional tics
-  SleepTimeTics = convert(UInt64, SleepTimeTics0)  #-- convert to UInt64
-  EndTic = BegTic + SleepTimeTics      #-- time tic for breaking out of burn loop
+  SleepTics0 = round(SleepSecs * TicsPerSec)    #-- eliminate fractional tics
+  SleepTics = convert(UInt64, SleepTics0)  #-- convert to UInt64
+  EndTic = BegTic + SleepTics      #-- time tic for breaking out of burn loop
 
   #----- calc how much time to sleep ----------------------------------
   TimeToSleep = 0.
-  if SleepTime > BurnThreshold  #-- do not sleep if below the burn threshold
-    TimeToSleep = SleepTime - BurnThreshold
+  if SleepSecs > BurnThreshold  #-- do not sleep if below the burn threshold
+    SystemSleepSecs = SleepSecs - BurnThreshold
   end
 
-  #----- sleep if above the accuracy limit -----------------------------
-  if TimeToSleep >= MinLibcSystemSleep
-    Libc.systemsleep(TimeToSleep)  #-- sleep a portion of SleepTime
+  #----- sleep only if above the accuracy limit -------------------------
+  if SystemSleepSecs >= MinSystemSleepSecs
+    Libc.systemsleep(SystemSleepSecs)  #-- sleep a portion of SleepTime
   end
 
   #----- burn off remaining time in while loop -------------------------
@@ -67,7 +67,7 @@ function sleep_ns(SleepTime::AbstractFloat)
 
   #----- calc the diff ------------------------------------------------
   ActualSleep = (CurrTic - BegTic) / TicsPerSec  #-- actual time slept
-  Diff = ActualSleep - SleepTime  #-- diff between Actual and Desired time
+  Diff = ActualSleep - SleepSecs  #-- diff between Actual and Desired time
   SleepOK = true
 
   #----- test if diff is beyond limits ---------------------------------
@@ -86,7 +86,7 @@ function sleep_ns(SleepTime::AbstractFloat)
         #-- hi diff error
         println("====================== excessive sleep_ns diff!! ========================================")
         @printf("DiffLimit => %12.9f secs has been exceeded!\n", DiffLimitHi)
-        @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", SleepTime, ActualSleep, Diff)
+        @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", SleepSecs, ActualSleep, Diff)
         println("Your computer is currently slow, or 'Interrupt Timer Interval' is set too high.")
         println("Leaving the Chrome browser open, can maintain this timer at a lower level.")
         println("See the README.md for further information.")
