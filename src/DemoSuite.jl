@@ -96,11 +96,11 @@ function DemoSuite()
 
 
   println("\nVarious CDF reports")
-  AccurateSleep.DemoCDF(.001, 2, 1000)
+  AccurateSleep.DemoCDF(.001, 1000)
   println("")
-  AccurateSleep.DemoCDF(.0001, 1, 5000)
+  AccurateSleep.DemoCDF(.0001, 5000)
   println("")
-  AccurateSleep.DemoCDF(.000003, 1, 5000)
+  AccurateSleep.DemoCDF(.000005, 100000)
   SuiteEndTic = time_ns()
   RunningSecs = (SuiteEndTic - SuiteBegTic) / TicsPerSec
   println("")
