@@ -1,7 +1,7 @@
-#-- 10-26-2016
+#-- 10-31-2016
 module AccurateSleep
 function sleep_ns(SleepSecs::AbstractFloat)
-  #----- accurately block the current task for SleepTime (secs) ---------
+  #----- accurately delay the current task for SleepTime (secs) ---------
 
   #------ constants ------------------------------------------------------
   const TicsPerSec = 1_000_000_000   #-- number of time tics in one sec
@@ -19,7 +19,6 @@ function sleep_ns(SleepSecs::AbstractFloat)
 
   #----- get the initial time tic -------------------------------------------
   BegTic = time_ns()   #-- beginning time tic
-
   #----- validate that SleepTime is within min to max range -----------------
   ParmOK = true
   if SleepSecs < MinSleepSecs
@@ -44,16 +43,16 @@ function sleep_ns(SleepSecs::AbstractFloat)
 
   #----- compute the ending time tic ----------------------------------------
   SleepTics0 = round(SleepSecs * TicsPerSec)    #-- eliminate fractional tics
-  SleepTics = convert(UInt64, SleepTics0)  #-- convert to UInt64
+  SleepTics = convert(UInt, SleepTics0)  #-- convert to UInt
   EndTic = BegTic + SleepTics      #-- time tic for breaking out of burn loop
 
-  #----- calc how much time to sleep ----------------------------------
+  #----- calc how much time to systemsleep ----------------------------------
   SystemSleepSecs = 0.
   if SleepSecs > BurnThreshold  #-- do not sleep if below the burn threshold
     SystemSleepSecs = SleepSecs - BurnThreshold
   end
 
-  #----- sleep only if above the accuracy limit -------------------------
+  #----- sleep if above the accuracy limit ------------------------------
   if SystemSleepSecs >= MinSystemSleepSecs
     Libc.systemsleep(SystemSleepSecs)  #-- sleep a portion of SleepTime
   end

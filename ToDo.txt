@@ -3,10 +3,9 @@ Change Instructions name to BasicUsage
 Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
 Two levels of Diff errors: DiffLimitLo and DiffLimitHi
 put sleep_ns function detail in README.md
-Method for accuracy on 32 bit system
-  BigInt?
 Possible names for sleep details
    SleepTime
+   DelayTime
    WaitTime
    PauseTime
    SuspendTime
