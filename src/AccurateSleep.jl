@@ -45,9 +45,9 @@ function sleep_ns(SleepSecs::AbstractFloat)
   end
 
   #----- compute the ending time tic ----------------------------------------
-  FloatTics = SleepSecs * TicsPerSec
+  FloatTics = SleepSecs * TicsPerSec     #-- floating point tics
   FloatTicsIntegral = round(FloatTics)   #-- round to integral float
-  SleepTics = convert(UInt, SleepTicsIntegral)  #-- convert to unsigned integer
+  SleepTics = convert(UInt, FloatTicsIntegral)  #-- convert to unsigned integer
   EndTic = BegTic + SleepTics      #-- ending tic for breaking out of burn loop
 
   #----- calc how much time to systemsleep ----------------------------------
