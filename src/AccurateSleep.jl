@@ -1,33 +1,36 @@
-#-- 10-31-2016
+#-- 01/01/2016
 module AccurateSleep
 function sleep_ns(SleepSecs::AbstractFloat)
-  #----- accurately delay the current task for SleepTime (secs) ---------
+  #----- accurately block the current task for SleepSecs (secs)
+  #----- SleepSecs must be a float within MinSleepSecs to MaxSleepSecs
+  #----- true or false is returned: depends on accuraccy of the sleep
 
   #------ constants ------------------------------------------------------
   const TicsPerSec = 1_000_000_000   #-- number of time tics in one sec
-  const MinSleepSecs = .000001000    #-- minimum allowed SleepTime (secs)
-  const MaxSleepSecs = 4.0           #-- maximum allowed SleepTime (secs)
+  const MinSleepSecs = .000001000    #-- minimum allowed SleepSecs (secs)
+  const MaxSleepSecs = 4.0           #-- maximum allowed SleepSecs (secs)
   const BurnThreshold = .0019        #-- time reserved For burning (secs)
   const MinSystemSleepSecs = .0010   #-- min accuracy limit of Libc.systemsleep (secs)
   const DiffLimitLo = .00006         #-- normal diff error limit (secs)
   const DiffLimitHi = .00500         #-- excessive diff error limit (secs)
-  const ShowErrors = false           #-- display error messages, if true (bool)
-  const ShowDiffErrorsLo = false     #-- display error messages, if true (bool)
-  const ShowDiffErrorsHi = true      #-- display error messages, if true (bool)
-  const QuitOnDiffError = false      #-- quit Julia on Diff error, if true (bool)
-  const QuitOnParmError = false      #-- quit Julia on Parm error, if true (bool)
+  const ShowErrors = false           #-- display error messages (bool)
+  const ShowDiffErrorsLo = false     #-- display DiffLimitLo error messages (bool)
+  const ShowDiffErrorsHi = true      #-- display DiffLimitHi error messages (bool)
+  const QuitOnDiffError = false      #-- quit Julia on Diff error (bool)
+  const QuitOnParmError = false      #-- quit Julia on Parm error (bool)
 
   #----- get the initial time tic -------------------------------------------
   BegTic = time_ns()   #-- beginning time tic
-  #----- validate that SleepTime is within min to max range -----------------
+
+  #----- validate that SleepSecs is within min to max range -----------------
   ParmOK = true
   if SleepSecs < MinSleepSecs
-    @printf("ParmError::  SleepTime: %10.9f is less than allowed min of %10.8f secs!!\n",
+    @printf("ParmError::  SleepSecs: %10.9f is less than allowed min of %10.8f secs!!\n",
     SleepSecs, MinSleepSecs)
     ParmOK = false
   end
   if SleepSecs > MaxSleepSecs
-    @printf("ParmError::  SleepTime: %12.1f is greater allowed max of %10.1f secs!!\n",
+    @printf("ParmError::  SleepSecs: %12.1f is greater allowed max of %10.1f secs!!\n",
     SleepSecs, MaxSleepSecs)
     ParmOK = false
   end
@@ -42,9 +45,10 @@ function sleep_ns(SleepSecs::AbstractFloat)
   end
 
   #----- compute the ending time tic ----------------------------------------
-  SleepTics0 = round(SleepSecs * TicsPerSec)    #-- eliminate fractional tics
-  SleepTics = convert(UInt, SleepTics0)  #-- convert to UInt
-  EndTic = BegTic + SleepTics      #-- time tic for breaking out of burn loop
+  FloatTics = SleepSecs * TicsPerSec
+  FloatTicsIntegral = round(FloatTics)   #-- round to integral float
+  SleepTics = convert(UInt, SleepTicsIntegral)  #-- convert to unsigned integer
+  EndTic = BegTic + SleepTics      #-- ending tic for breaking out of burn loop
 
   #----- calc how much time to systemsleep ----------------------------------
   SystemSleepSecs = 0.
@@ -73,8 +77,6 @@ function sleep_ns(SleepSecs::AbstractFloat)
   if Diff > DiffLimitLo
     SleepOK = false
     if ShowDiffErrorsLo
-      #@show(Diff)
-      #diffstop()
       if Diff < DiffLimitHi
         #-- lo diff error
         @printf("Error:  Wanted: %12.9f secs  Act: %12.9f secs  Diff: %12.9f secs\n", SleepTime, ActualSleep, Diff)
@@ -87,9 +89,9 @@ function sleep_ns(SleepSecs::AbstractFloat)
         @printf("DiffLimit => %12.9f secs has been exceeded!\n", DiffLimitHi)
         @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", SleepSecs, ActualSleep, Diff)
         println("Your computer is currently slow, or 'Interrupt Timer Interval' is set too high.")
-        println("Leaving the Chrome browser open, can maintain this timer at a lower level.")
+        println("Leaving the Chrome browser open in Windows, can maintain this timer at a lower level.")
         println("See the README.md for further information.")
-        println("=====================================================================================")
+        println("=========================================================================================")
       end
     end
     if QuitOnDiffError
@@ -111,7 +113,6 @@ if Pkg.installed("BenchmarkTools") !== nothing
   include("CheckCPUImpact.jl")  #-- demo CPU utilization
   include("CheckInterruptTimer.jl")  #-- check PIC
   include("Instructions.jl")  #-- check PIC
-  include("ToyController.jl")  #--
   include("ThouSep.jl")  #-- insert comma separators into string
 else
   BenchmarkToolsInstalled = false

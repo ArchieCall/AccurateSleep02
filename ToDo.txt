@@ -4,9 +4,9 @@ Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
 Two levels of Diff errors: DiffLimitLo and DiffLimitHi
 put sleep_ns function detail in README.md
 Possible names for sleep details
-   SleepTime
    DelayTime
    WaitTime
+   SleepTime
    PauseTime
    SuspendTime
    BlockTime
