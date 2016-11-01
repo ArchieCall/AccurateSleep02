@@ -30,7 +30,7 @@ function sleep_ns(SleepSecs::AbstractFloat)
     ParmOK = false
   end
   if SleepSecs > MaxSleepSecs
-    @printf("ParmError::  SleepSecs: %12.1f is greater allowed max of %10.1f secs!!\n",
+    @printf("ParmError::  SleepSecs: %12.1f is greater than allowed max of %10.1f secs!!\n",
     SleepSecs, MaxSleepSecs)
     ParmOK = false
   end
