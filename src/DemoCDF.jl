@@ -170,6 +170,6 @@ function DemoCDF(desired_sleep::AbstractFloat, numloops::Integer)
   pcterrs = (cnt_errs / numloops ) * 100.
   loops = AccurateSleep.ThouSep(numloops)
   println("=========================================================================================================")
-  @printf("  Iters => %s   Number Errors => %i   Errors Rate => %8.5f Percent\n", loops, cnt_errs, pcterrs)
+  @printf("  Iters => %s   Number Outliers => %i   Outlier Rate => %8.5f Percent\n", loops, cnt_errs, pcterrs)
   println("=========================================================================================================")
 end

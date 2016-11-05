@@ -1,26 +1,26 @@
-#-- 01/01/2016
+#-- 01/05/2016
 module AccurateSleep
 function sleep_ns(SleepSecs::AbstractFloat)
-  #----- accurately block the current task for SleepSecs (secs)
-  #----- SleepSecs must be a float within MinSleepSecs to MaxSleepSecs
-  #----- true or false is returned: depends on accuraccy of the sleep
+  #----- accurately block the current task for specified SleepSecs
+  #----- SleepSecs (secs) must be a float within MinSleepSecs to MaxSleepSecs
+  #----- returns true or false: depending on accuracy of actual time slept
 
   #------ constants ------------------------------------------------------
-  const TicsPerSec = 1_000_000_000   #-- number of time tics in one sec
-  const MinSleepSecs = .000001000    #-- minimum allowed SleepSecs (secs)
-  const MaxSleepSecs = 4.0           #-- maximum allowed SleepSecs (secs)
+  const TicsPerSec  = 1_000_000_000  #-- number of time tics in one sec
+  const MinSleepSecs = .000001       #-- minimum allowed SleepSecs (secs)
+  const MaxSleepSecs = 4.00000       #-- maximum allowed SleepSecs (secs)
   const BurnThreshold = .0019        #-- time reserved For burning (secs)
-  const MinSystemSleepSecs = .0010   #-- min accuracy limit of Libc.systemsleep (secs)
-  const DiffLimitLo = .00006         #-- normal diff error limit (secs)
-  const DiffLimitHi = .00500         #-- excessive diff error limit (secs)
-  const ShowErrors = false           #-- display error messages (bool)
-  const ShowDiffErrorsLo = false     #-- display DiffLimitLo error messages (bool)
-  const ShowDiffErrorsHi = true      #-- display DiffLimitHi error messages (bool)
-  const QuitOnDiffError = false      #-- quit Julia on Diff error (bool)
+  const MinSystemSleepSecs = .0010   #-- accuracy limit of Libc.systemsleep (secs)
+  const AllowSystemSleep = true      #-- if true, allow calls to SystemSleep (bool)
+  const DiffOutlierLimit = .00006    #-- diffs above OutlierLimit occur about 1% of time (secs)
+  const DiffErrorLimit = .00500      #-- diffs above ErrorLimit are unusual events (secs)
+  const ShowDiffOutliers = false     #-- display DiffError msgs (bool)
+  const ShowDiffErrors = false       #-- display DiffOutlier msgs (bool)
+  const QuitOnDiffError = false      #-- quit Julia on diff ERROR (bool)
   const QuitOnParmError = false      #-- quit Julia on Parm error (bool)
 
   #----- get the initial time tic -------------------------------------------
-  BegTic = time_ns()   #-- beginning time tic
+  BegTic = time_ns()   #-- beginning time tic this a type UInt
 
   #----- validate that SleepSecs is within min to max range -----------------
   ParmOK = true
@@ -45,20 +45,22 @@ function sleep_ns(SleepSecs::AbstractFloat)
   end
 
   #----- compute the ending time tic ----------------------------------------
-  FloatTics = SleepSecs * TicsPerSec     #-- floating point tics
+  FloatTics = SleepSecs * TicsPerSec     #-- floating point tics for the sleep
   FloatTicsIntegral = round(FloatTics)   #-- round to integral float
-  SleepTics = convert(UInt, FloatTicsIntegral)  #-- convert to unsigned integer
-  EndTic = BegTic + SleepTics      #-- ending tic for breaking out of burn loop
+  SleepTics = convert(UInt, FloatTicsIntegral)  #-- convert to UInt
+  EndTic = BegTic + SleepTics      #-- UInt ending tic to break from burn loop
 
-  #----- calc how much time to systemsleep ----------------------------------
-  SystemSleepSecs = 0.
-  if SleepSecs > BurnThreshold  #-- do not sleep if below the burn threshold
-    SystemSleepSecs = SleepSecs - BurnThreshold
-  end
 
-  #----- sleep if above the accuracy limit ------------------------------
-  if SystemSleepSecs >= MinSystemSleepSecs
-    Libc.systemsleep(SystemSleepSecs)  #-- sleep a portion of SleepTime
+  if AllowSystemSleep  #-- is SystemSleep allowed?
+    #----- calc how much time to systemsleep ----------------------------------
+    SystemSleepSecs = 0.
+    if SleepSecs > BurnThreshold  #-- do not sleep if below the burn threshold
+      SystemSleepSecs = SleepSecs - BurnThreshold
+    end
+    #----- sleep, only if above the accuracy limit ------------------------------
+    if SystemSleepSecs >= MinSystemSleepSecs
+      Libc.systemsleep(SystemSleepSecs)  #-- sleep a portion of SleepTime
+    end
   end
 
   #----- burn off remaining time in while loop -------------------------
@@ -74,17 +76,16 @@ function sleep_ns(SleepSecs::AbstractFloat)
   SleepOK = true
 
   #----- test if diff is beyond limits ---------------------------------
-  if Diff > DiffLimitLo
+  if Diff > DiffOutlierLimit
     SleepOK = false
-    if ShowDiffErrorsLo
-      if Diff < DiffLimitHi
+    if ShowDiffOutliers
+      if Diff < DiffErrorLimit
         #-- lo diff error
         @printf("Error:  Wanted: %12.9f secs  Act: %12.9f secs  Diff: %12.9f secs\n", SleepTime, ActualSleep, Diff)
       end
     end
-    if Diff > DiffLimitHi
-      if ShowDiffErrorsHi
-        #-- hi diff error
+    if Diff > DiffErrorLimit
+      if ShowDiffErrors
         println("====================== excessive sleep_ns diff!! ========================================")
         @printf("DiffLimit => %12.9f secs has been exceeded!\n", DiffLimitHi)
         @printf("Desired => %12.9f secs  Actual => %12.9f secs  Diff => %12.9f secs\n", SleepSecs, ActualSleep, Diff)
@@ -92,11 +93,11 @@ function sleep_ns(SleepSecs::AbstractFloat)
         println("Leaving the Chrome browser open in Windows, can maintain this timer at a lower level.")
         println("See the README.md for further information.")
         println("=========================================================================================")
+        if QuitOnDiffError
+          println("... Diff Error:  program halted.")
+          quit()
+        end
       end
-    end
-    if QuitOnDiffError
-      println("... Diff Error:  program halted.")
-      quit()
     end
   end
   return SleepOK

@@ -1,16 +1,5 @@
 ---- todo for AccurateSleep
 Change Instructions name to BasicUsage
 Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
-Two levels of Diff errors: DiffLimitLo and DiffLimitHi
 put sleep_ns function detail in README.md
-Possible names for sleep details
-   DelayTime
-   WaitTime
-   SleepTime
-   PauseTime
-   SuspendTime
-   BlockTime
-   BurnTime
-   BusyWaitTime
-   IdleTime
-     all of the above with Secs instead of Time
+always run DemoCDF once with small iters to warm up
