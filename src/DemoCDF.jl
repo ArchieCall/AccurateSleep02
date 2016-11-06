@@ -12,11 +12,13 @@ function DemoCDF(desired_sleep::AbstractFloat, numloops::Integer)
   end
 
   TotalLoops =  numloops
+  SkipSleepThreshold = .001
+  SkipSleepThreshold = 1.001
   #DurationSleep_ns = TotalLoops * (desired_sleep + .000005)
   DurationSleep_ns = TotalLoops * (desired_sleep + .0000017)
   DurationSleep = 0.
   DurationSystemSleep = 0.
-  if desired_sleep >= .001
+  if desired_sleep >= SkipSleepThreshold
     DurationSleep = TotalLoops * (desired_sleep + .0014)
     DurationSystemSleep = TotalLoops * (desired_sleep + .0009)
   end
@@ -47,7 +49,7 @@ function DemoCDF(desired_sleep::AbstractFloat, numloops::Integer)
   max_diff3 = 0.
   cnt_errs = 0
   sleep_time = desired_sleep
-  SkipSleepThreshold = .001
+  #SkipSleepThreshold = .001
   for i in 1:numloops
 
     #--- stats for sleep_ns
