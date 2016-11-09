@@ -3,3 +3,4 @@ Change Instructions name to BasicUsage
 Logs folder: DemoCDF, CheckCPUImpact, DemoSuite, CheckInterruptTimer
 put sleep_ns function detail in README.md
 always run DemoCDF once with small iters to warm up
+DemoCDF have parm to bypass sleep and systemsleep comparisons

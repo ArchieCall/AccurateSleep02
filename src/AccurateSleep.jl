@@ -1,4 +1,4 @@
-#-- 01/05/2016
+#-- 01/08/2016
 module AccurateSleep
 function sleep_ns(SleepSecs::AbstractFloat)
   #----- accurately block the current task for specified SleepSecs
